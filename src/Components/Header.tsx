@@ -1,6 +1,5 @@
 import React from "react";
 import styled from "styled-components";
-import { Button as AtdButton } from "antd";
 import Search from "./Search";
 
 const Container = styled.div`
@@ -29,10 +28,13 @@ const Logo = styled.div`
 
 const ButtonContainer = styled.div`
   display: flex;
+  width: 11rem;
+  justify-content: space-between;
 `;
 
-const Button = styled(AtdButton)`
-  margin: 0 0.2rem;
+const Button = styled.button`
+  font-weight: 700;
+  padding: 0.5rem;
 `;
 
 interface State {}
@@ -47,7 +49,9 @@ export default class Header extends React.Component<State, Props> {
           <Logo>Keyboard Hunter</Logo>
           <Search />
           <ButtonContainer>
-            <Button type="primary">Sign In</Button>
+            <Button style={{ color: "white", backgroundColor: "black" }}>
+              Sign In
+            </Button>
             <Button>Log In</Button>
           </ButtonContainer>
         </InnerContainer>

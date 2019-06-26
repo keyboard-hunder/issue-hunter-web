@@ -6,10 +6,9 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   background-color: white;
-  border-radius: 0.3rem;
+  border-radius: 0.1rem;
   padding: 1rem;
   min-height: 6rem;
-  box-shadow: 0px 0px 5px 0.5px rgba(0, 0, 0, 0.2);
 `;
 
 const RepoText = styled.div`
