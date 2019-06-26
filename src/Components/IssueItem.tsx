@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { Tag as AtdTag } from "antd";
+import PLTag from "./PLTag";
 
 const Container = styled.div`
   display: flex;
@@ -28,18 +28,6 @@ const TagContainer = styled.div`
   line-height: 2;
 `;
 
-const LanguageImg = styled.img`
-  height: 1rem;
-  margin-right: 0.2rem;
-`;
-
-const Tag = styled(AtdTag)`
-  font-weight: 700;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-`;
-
 interface Props {}
 
 interface State {}
@@ -57,22 +45,10 @@ export default class IssueItem extends React.Component<Props, State> {
           버그입니다.
         </IssueContent>
         <TagContainer>
-          <Tag color="#f16524">
-            <LanguageImg src="https://img.icons8.com/material/48/000000/html-5.png" />{" "}
-            HTML
-          </Tag>
-          <Tag color="#1da1f2">
-            <LanguageImg src="https://www.shareicon.net/download/2016/08/01/639964_internet.svg" />
-            CSS
-          </Tag>
-          <Tag color="#fb9e21">
-            <LanguageImg src="https://img.icons8.com/ios/50/000000/javascript-logo-filled.png" />
-            JavaScript
-          </Tag>
-          <Tag color="#61dbfb">
-            <LanguageImg src="https://img.icons8.com/ios//50/000000/react-native-filled.png" />
-            React
-          </Tag>
+          <PLTag pl="html" />
+          <PLTag pl="css" />
+          <PLTag pl="js" />
+          <PLTag pl="react" />
         </TagContainer>
       </Container>
     );
