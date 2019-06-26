@@ -8,6 +8,7 @@ const Container = styled.div`
   justify-content: space-between
   width: 100%;
   min-width: 30rem;
+  max-width: 50rem;
   padding: 0.5rem;
 `;
 
