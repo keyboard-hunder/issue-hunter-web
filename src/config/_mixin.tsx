@@ -19,7 +19,11 @@ export const headerHeight = "6rem";
 export const color = {
   bgColor: "#EAEAEA",
   fontColor: "#121212",
-  mainColor: "#f6e58d"
+  mainColor: "#f6e58d",
+  html: "#f16524",
+  css: "#1da1f2",
+  js: "#fb9e21",
+  react: "#61dbfb"
 };
 
 const customMediaQuery = (maxWidth: number) =>

@@ -27,6 +27,13 @@ const HomePresenter = ({  }: Props) => {
         <IssueItem />
         <IssueItem />
         <IssueItem />
+        <IssueItem />
+        <IssueItem />
+        <IssueItem />
+        <IssueItem />
+        <IssueItem />
+        <IssueItem />
+        <IssueItem />
       </IssueItemList>
     </Container>
   );
