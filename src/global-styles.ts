@@ -42,6 +42,13 @@ export const GlobalStyle = createGlobalStyle`
     }
   }
 
+  input {
+    border: none;
+    &:focus{
+      outline: none;
+    }
+  }
+
   /* animations */
   @keyframes release {
     0% {
