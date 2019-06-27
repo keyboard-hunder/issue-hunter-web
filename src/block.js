@@ -343,6 +343,10 @@ var myContract = new caver.klay.Contract(abi, contractAddress, {
     gasPrice: '25000000000' // default gas price in peb, 25 Gpeb in this case
 });
 
+var privateKey = '0x8d760d7929139a7c3a993f36169c25596352e7f303c1f923576253af6b2e9f55'; // ONLY FOR SHORT DEVELOP
+var myAccount = caver.klay.accounts.privateKeyToAccount(privateKey);
+caver.klay.accounts.wallet.add(myAccount);
+
 
 function loadOpenedIssues(callback) {
     loadIssue(0, callback);
@@ -360,4 +364,15 @@ function loadIssue(idx, callback) {
 }
 
 
-loadOpenedIssues();
+function makeIssue(repoUrl, title, tags, price) {
+    myContract.methods.makeIssue(repoUrl, title, tags, price).send({
+        from: myAccount.address,
+        gas: '500000', // fixed
+    }, function(error, transactionHash) {
+        console.log(transactionHash);
+    });
+}
+
+
+// example
+makeIssue("http://test.com", "testTitle", ["tet1", "tet2"], "27");
