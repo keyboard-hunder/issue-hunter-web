@@ -38,7 +38,7 @@ export default class Header extends React.Component<State, Props> {
     return (
       <Container>
         <InnerContainer>
-          <Logo>Keyboard Hunter</Logo>
+          <Logo>Issue Hunter</Logo>
           <Search />
           <ButtonContainer>
             <Button style={{ color: "white", backgroundColor: "black" }}>
