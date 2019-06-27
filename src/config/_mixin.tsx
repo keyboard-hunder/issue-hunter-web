@@ -17,7 +17,24 @@ export const PLTags = [
   "c#",
   "nodejs",
   "java",
-  "pascal"
+  "pascal",
+  "django",
+  "spring",
+  "expressjs",
+  "flask",
+  "haskel",
+  "prolog",
+  "keras",
+  "tenserflow",
+  "kotlin",
+  "scala",
+  "swift",
+  "play",
+  "rubyonrails",
+  "php",
+  "jquery",
+  "vue",
+  "angular"
 ];
 
 export const baseURL = "http://localhost:3000";
