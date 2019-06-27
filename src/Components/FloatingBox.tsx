@@ -1,6 +1,8 @@
 import React from "react";
 import styled from "styled-components";
 import Filter from "./Filter";
+import GitHubLogin from "./GitHubLogin";
+import Search from "./Search";
 
 const Container = styled.div`
   position: sticky;
@@ -53,25 +55,35 @@ const Button = styled.button`
   margin-top: 0.5rem;
 `;
 
-interface Props {}
+interface Props {
+  toggleTag: (idx: number) => void;
+  tags: number[];
+}
 
 interface State {}
 
 export default class FloatingBox extends React.Component<Props, State> {
   render() {
+    const isLogin = Boolean(localStorage.getItem("jwt"));
     return (
       <Container>
-        <ProfileContainer>
-          <UserProfile>
-            <ProfileImg />
-            <Nickname>보노보노</Nickname>
-          </UserProfile>
-          <ButtonContainer>
-            <Button>내 글보기</Button>
-            <Button>글 작성하기</Button>
-          </ButtonContainer>
-        </ProfileContainer>
-        <Filter />
+        {isLogin ? (
+          <ProfileContainer>
+            <UserProfile>
+              <ProfileImg />
+              <Nickname>보노보노</Nickname>
+            </UserProfile>
+
+            <ButtonContainer>
+              <Button>내 글보기</Button>
+              <Button>글 작성하기</Button>
+            </ButtonContainer>
+          </ProfileContainer>
+        ) : (
+          <GitHubLogin />
+        )}
+        <Search />
+        <Filter tags={this.props.tags} toggleTag={this.props.toggleTag} />
       </Container>
     );
   }

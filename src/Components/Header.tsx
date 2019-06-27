@@ -1,8 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import Search from "./Search";
 import { SharedContainer, SharedInnerContainer } from "../sharedStyle";
-import GitHubLogin from "./GitHubLogin";
 import { Link } from "react-router-dom";
 
 const Container = styled(SharedContainer)`
@@ -20,12 +18,6 @@ const Logo = styled.div`
   color: white;
 `;
 
-const ButtonContainer = styled.div`
-  display: flex;
-  width: 11rem;
-  justify-content: space-between;
-`;
-
 interface State {}
 
 interface Props {}
@@ -35,13 +27,9 @@ export default class Header extends React.Component<State, Props> {
     return (
       <Container>
         <InnerContainer>
-          <Logo>
-            <Link to="/">Issue Hunter</Link>
-          </Logo>
-          <Search />
-          <ButtonContainer>
-            <GitHubLogin />
-          </ButtonContainer>
+          <Link to="/">
+            <Logo>Issue - Hunter</Logo>
+          </Link>
         </InnerContainer>
       </Container>
     );

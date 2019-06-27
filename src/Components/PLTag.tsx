@@ -17,37 +17,38 @@ const Tag = styled(AtdTag)`
 
 interface Props {
   pl: string;
+  disable?: boolean;
 }
 
 interface State {}
 
 export default class PLTag extends React.Component<Props, State> {
-  renderTag = (pl: string) => {
+  renderTag = (pl: string, disable: boolean = false) => {
     switch (pl) {
       case "html":
         return (
-          <Tag color="#f16524">
+          <Tag color={disable ? "grey" : "#f16524"}>
             <LanguageImg src="https://img.icons8.com/material/48/000000/html-5.png" />{" "}
             HTML
           </Tag>
         );
       case "css":
         return (
-          <Tag color="#1da1f2">
+          <Tag color={disable ? "grey" : "#1da1f2"}>
             <LanguageImg src="https://www.shareicon.net/download/2016/08/01/639964_internet.svg" />
             CSS
           </Tag>
         );
       case "js":
         return (
-          <Tag color="#fb9e21">
+          <Tag color={disable ? "grey" : "#fb9e21"}>
             <LanguageImg src="https://img.icons8.com/ios/50/000000/javascript-logo-filled.png" />
             JavaScript
           </Tag>
         );
       case "react":
         return (
-          <Tag color="#61dbfb">
+          <Tag color={disable ? "grey" : "#61dbfb"}>
             <LanguageImg src="https://img.icons8.com/ios//50/000000/react-native-filled.png" />
             React
           </Tag>
@@ -58,7 +59,7 @@ export default class PLTag extends React.Component<Props, State> {
   };
 
   render() {
-    const { pl } = this.props;
-    return this.renderTag(pl);
+    const { pl, disable } = this.props;
+    return this.renderTag(pl, disable);
   }
 }

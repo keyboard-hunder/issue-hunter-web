@@ -19,7 +19,8 @@ class Oauth extends React.Component<Props, State> {
           result: { token }
         }
       } = res;
-      localStorage.setItem("jwt", token);
+      await localStorage.setItem("jwt", token);
+      this.props.history.push("/");
     } catch (error) {
       toast.error(`😫 ${error.message}`);
     }

@@ -6,6 +6,20 @@ const sizes = {
   phone: 576
 };
 
+export const PLTags = [
+  "html",
+  "css",
+  "js",
+  "react",
+  "python",
+  "c",
+  "c++",
+  "c#",
+  "nodejs",
+  "java",
+  "pascal"
+];
+
 export const baseURL = "http://localhost:3000";
 
 export const fontSize = {

@@ -16,9 +16,12 @@ const IssueItemList = styled.div`
   margin-right: 1rem;
 `;
 
-interface Props {}
+interface Props {
+  tags: number[];
+  toggleTag: (idx: number) => void;
+}
 
-const HomePresenter: React.SFC<Props> = ({}) => {
+const HomePresenter: React.SFC<Props> = ({ tags, toggleTag }) => {
   return (
     <Container>
       <IssueItemList>
@@ -35,7 +38,7 @@ const HomePresenter: React.SFC<Props> = ({}) => {
         <IssueItem />
         <IssueItem />
       </IssueItemList>
-      <FloatingBox />
+      <FloatingBox tags={tags} toggleTag={toggleTag} />
     </Container>
   );
 };

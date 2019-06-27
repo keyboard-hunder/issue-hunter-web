@@ -6,7 +6,7 @@ const Container = styled.div`
   min-width: 10rem;
   display: flex;
   width: 100%;
-  margin: 0 1rem;
+  margin-bottom: 0.5rem;
 `;
 
 const Input = styled.input`

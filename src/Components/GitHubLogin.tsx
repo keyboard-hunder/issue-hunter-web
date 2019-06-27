@@ -4,9 +4,13 @@ import { baseURL } from "../config/_mixin";
 
 const Container = styled.button`
   font-weight: 700;
-  padding: 0.5rem;
-  background-color: white;
-  width: 4rem;
+  padding: 1rem;
+  background-color: black;
+  width: 100%;
+  margin-bottom: 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `;
 
 const Link = styled.a`
@@ -15,10 +19,15 @@ const Link = styled.a`
 `;
 
 const Icon = styled.i`
-  font-size: 1.2rem;
+  color: white;
+  font-size: 2rem;
+  margin-right: 0.5rem;
 `;
 
-const Text = styled.div``;
+const Text = styled.div`
+  font-size: 1.2rem;
+  color: white;
+`;
 
 interface Props {}
 

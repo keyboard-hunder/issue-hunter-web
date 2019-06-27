@@ -7,7 +7,7 @@ const Container = styled.div`
   display: flex;
   background-color: white;
   border-radius: 0.3rem;
-  padding: 1rem;
+  padding-left: 1rem;
   min-height: 6rem;
 `;
 
@@ -33,8 +33,6 @@ const TagContainer = styled.div`
 const NumericContainer = styled.div`
   display: flex;
   justify-content: space-evenly;
-  width: 15rem;
-  margin-right: 0.5rem;
   color: grey;
 `;
 
@@ -42,6 +40,7 @@ const MainContainer = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
+  padding: 1rem 0;
 `;
 
 const NumericItem = styled.div`
@@ -49,7 +48,7 @@ const NumericItem = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  width: 3rem;
+  width: 5rem;
   font-weight: 700;
 `;
 const NumericText = styled.div`
@@ -69,20 +68,6 @@ export default class IssueItem extends React.Component<Props, State> {
   render() {
     return (
       <Container>
-        <NumericContainer>
-          <NumericItem>
-            <NumericNum> 1</NumericNum>
-            <NumericText>조회수</NumericText>
-          </NumericItem>
-          <NumericItem>
-            <NumericNum> 1</NumericNum>
-            <NumericText>댓글</NumericText>
-          </NumericItem>
-          <NumericItem>
-            <NumericNum> 0.002</NumericNum>
-            <NumericText>현상금</NumericText>
-          </NumericItem>
-        </NumericContainer>
         <MainContainer>
           <RepoText>Keyboard-hunter</RepoText>
           <IssueText>
@@ -101,6 +86,13 @@ export default class IssueItem extends React.Component<Props, State> {
             <PLTag pl="react" />
           </TagContainer>
         </MainContainer>
+
+        <NumericContainer>
+          <NumericItem>
+            <NumericNum> 0.002</NumericNum>
+            <NumericText>현상금</NumericText>
+          </NumericItem>
+        </NumericContainer>
       </Container>
     );
   }
