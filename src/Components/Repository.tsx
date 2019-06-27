@@ -71,14 +71,13 @@ interface State {}
 export default class Repository extends React.Component<Props, State> {
   render() {
     const {
-      repository: { id, name },
+      repository: { fullName, name },
       isActive
     } = this.props;
-    console.log(id);
     return (
       <Container
         isActive={isActive}
-        onClick={() => this.props.handleOnClickRepository(id)}
+        onClick={() => this.props.handleOnClickRepository(fullName)}
       >
         <LeftContainer>
           <GitHubIcon className="fab fa-github" />

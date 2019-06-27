@@ -8,9 +8,9 @@ interface Props {}
 interface State {
   loading: boolean;
   repositories: unknown[];
-  issues: unknown[];
+  issues: any;
   price: number;
-  targetRepository: unknown;
+  targetRepository: string;
   targetIssue: unknown;
   tags: unknown[];
 }
@@ -22,16 +22,27 @@ export default class IssueCreateContainer extends React.Component<
   state = {
     loading: true,
     repositories: [],
-    issues: [],
-    targetRepository: null,
+    issues: null,
+    targetRepository: "",
     targetIssue: null,
     price: 0,
     tags: []
   };
 
-  handleOnClickRepository = (targetRepository: unknown) => {
+  handleOnClickRepository = async (targetRepository: any) => {
     console.log(targetRepository);
     this.setState({ targetRepository });
+    const {
+      data: {
+        result: { issues }
+      }
+    } = await serverDataAPIs.getIssues(targetRepository, 0);
+    console.log(issues);
+    if (issues) {
+      this.setState({ issues });
+    } else {
+      this.setState({ issues: [] });
+    }
   };
 
   handleOnClickIssue = (issue: unknown) => {
@@ -44,9 +55,8 @@ export default class IssueCreateContainer extends React.Component<
         data: {
           result: { repositories }
         }
-      } = await serverDataAPIs.getRepositories(jwt);
+      } = await serverDataAPIs.getRepositories(jwt, 0);
       this.setState({ repositories, loading: false });
-      //   const issues = await serverDataAPIs.getIssues("dl0312/")
     } else {
     }
   };

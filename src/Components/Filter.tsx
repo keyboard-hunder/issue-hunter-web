@@ -41,7 +41,7 @@ export default class Filter extends React.Component<Props, State> {
         <TagContainer>
           {PLTags.map((tag, idx) => (
             <TagWrapper onClick={() => this.props.toggleTag(idx)}>
-              <PLTag disable={tags.indexOf(idx) == -1} key={idx} pl={tag} />
+              <PLTag disable={tags.indexOf(idx) === -1} key={idx} pl={tag} />
             </TagWrapper>
           ))}
         </TagContainer>

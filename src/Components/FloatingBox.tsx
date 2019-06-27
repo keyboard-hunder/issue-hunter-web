@@ -84,6 +84,7 @@ export default class FloatingBox extends React.Component<Props, State> {
               <Link style={{ width: "100%" }} to={"/issue-create"}>
                 <Button>글 작성하기</Button>
               </Link>
+              <Button>로그아웃</Button>
             </ButtonContainer>
           </ProfileContainer>
         ) : (

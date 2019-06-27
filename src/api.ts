@@ -13,10 +13,11 @@ export const serverLoginAPIs = {
 };
 
 export const serverDataAPIs = {
-  getRepositories: (jwt: string) =>
+  getRepositories: (jwt: string, page: number) =>
     serverBaseAPI.get(`github/repositories`, {
+      params: { page },
       headers: { Authorization: `Bearer ${jwt}` }
     }),
-  getIssues: (repositoryFullname: string) =>
-    serverBaseAPI.get(`github/issues`, { params: { repositoryFullname } })
+  getIssues: (repositoryFullName: string, page: number) =>
+    serverBaseAPI.get(`github/issues`, { params: { repositoryFullName, page } })
 };
