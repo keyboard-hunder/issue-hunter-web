@@ -38,7 +38,6 @@ export default class GitHubLogin extends React.Component<Props, State> {
     return (
       <Container>
         <Link
-          target="_blank"
           href={`https://github.com/login/oauth/authorize?client_id=11a01d2229799eeedf98&redirect_uri=${baseURL}/oauth`}
         >
           <Icon className="fab fa-github" />

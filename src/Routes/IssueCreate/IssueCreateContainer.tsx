@@ -13,6 +13,8 @@ interface State {
   targetRepository: string;
   targetIssue: unknown;
   tags: unknown[];
+  repositoryPage: number;
+  issuePage: number;
 }
 
 export default class IssueCreateContainer extends React.Component<
@@ -26,7 +28,9 @@ export default class IssueCreateContainer extends React.Component<
     targetRepository: "",
     targetIssue: null,
     price: 0,
-    tags: []
+    tags: [],
+    repositoryPage: 0,
+    issuePage: 0
   };
 
   handleOnClickRepository = async (targetRepository: any) => {
@@ -45,18 +49,41 @@ export default class IssueCreateContainer extends React.Component<
     }
   };
 
-  handleOnClickIssue = (issue: unknown) => {
-    console.log(issue);
-  };
-  componentDidMount = async () => {
+  handleOnClickMoreRepository = async () => {
     const jwt = localStorage.getItem("jwt");
+    const { repositoryPage } = this.state;
     if (jwt) {
       const {
         data: {
           result: { repositories }
         }
-      } = await serverDataAPIs.getRepositories(jwt, 0);
-      this.setState({ repositories, loading: false });
+      } = await serverDataAPIs.getRepositories(jwt, repositoryPage);
+      this.setState({
+        repositories: [this.state.repositories, ...repositories],
+        loading: false,
+        repositoryPage: repositoryPage + 1
+      });
+    } else {
+    }
+  };
+
+  handleOnClickIssue = (issue: unknown) => {
+    console.log(issue);
+  };
+  componentDidMount = async () => {
+    const jwt = localStorage.getItem("jwt");
+    const { repositoryPage } = this.state;
+    if (jwt) {
+      const {
+        data: {
+          result: { repositories }
+        }
+      } = await serverDataAPIs.getRepositories(jwt, repositoryPage);
+      this.setState({
+        repositories,
+        loading: false,
+        repositoryPage: repositoryPage + 1
+      });
     } else {
     }
   };

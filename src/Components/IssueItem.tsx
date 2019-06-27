@@ -57,7 +57,7 @@ const NumericItem = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  width: 5rem;
+  width: 6.5rem;
   font-weight: 700;
 `;
 
@@ -117,10 +117,13 @@ export default class IssueItem extends React.Component<Props, State> {
         <MainContainer>
           <RepoText>Keyboard-hunter</RepoText>
           <IssueText>
-            <Link to="/issue-detail/1">[KH] 키보드 버그</Link>
+            <Link to="/issue-detail/1">{issue.title}</Link>
           </IssueText>
           <ThirdContainer>
             <TagContainer>
+              {issue.tags.split("/").map((tag: string) => (
+                <PLTag pl={tag} />
+              ))}
               <PLTag pl="html" />
               <PLTag pl="css" />
               <PLTag pl="js" />

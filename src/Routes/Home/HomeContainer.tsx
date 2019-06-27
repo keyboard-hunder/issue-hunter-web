@@ -38,13 +38,32 @@ export default class HomeContainer extends React.Component<Props, State> {
   };
 
   componentDidMount = async () => {
-    let issues = [];
+    let issues: any = [];
     const range = 10;
     for (let i = 0; i < range; i++) {
-      issues.push(loadIssue(i, this.handleSetTags));
+      loadIssue(i, (result: any) => {
+        if (result) {
+          issues.push(result);
+          this.setState({ issues });
+        }
+      });
     }
-    this.setState({ issues });
   };
+
+  // componentDidUpdate = async (prevProp: Props, prevState: State) => {
+  //   console.log(this.state);
+  //   if (this.state.issues.length !== 0) {
+  //     let issues: any = [];
+  //     const range = 10;
+  //     for (let i = 0; i < range; i++) {
+  //       loadIssue(i, (result: any) => {
+  //         if (result) issues.push(result);
+  //       });
+  //     }
+  //     console.log(issues);
+  //     this.setState({ issues });
+  //   }
+  // };
 
   render() {
     const { issues } = this.state;

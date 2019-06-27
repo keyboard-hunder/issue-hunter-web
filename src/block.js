@@ -432,7 +432,7 @@ export function loadIssue(idx, callback) {
       if (result !== undefined) {
         if (callback) callback(result);
         else {
-          console.log("there's no callback");
+          return result;
         }
       }
     });

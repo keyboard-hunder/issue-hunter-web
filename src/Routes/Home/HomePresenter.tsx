@@ -24,24 +24,14 @@ interface Props {
 }
 
 const HomePresenter: React.SFC<Props> = ({ tags, toggleTag, issues }) => {
+  console.log("in presenter", issues);
   return (
     <Container>
       <IssueItemList>
-        {issues.map((issue: any, idx: number) => (
-          <IssueItem issue={issue} key={idx} />
-        ))}
-        <IssueItem />
-        <IssueItem />
-        <IssueItem />
-        <IssueItem />
-        <IssueItem />
-        <IssueItem />
-        <IssueItem />
-        <IssueItem />
-        <IssueItem />
-        <IssueItem />
-        <IssueItem />
-        <IssueItem />
+        {issues &&
+          issues.map((issue: any, idx: number) => (
+            <IssueItem issue={issue} key={idx} />
+          ))}
       </IssueItemList>
       <FloatingBox tags={tags} toggleTag={toggleTag} />
     </Container>

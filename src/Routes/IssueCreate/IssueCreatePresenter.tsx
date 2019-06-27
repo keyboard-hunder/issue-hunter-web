@@ -86,6 +86,8 @@ const Nickname = styled.div`
   font-weight: 700;
 `;
 
+const PlusIcon = styled.i``;
+
 interface Props {
   repositories: unknown[];
   issues: any;
@@ -117,6 +119,7 @@ const IssueCreatePresenter: React.SFC<Props> = ({
               key={idx}
             />
           ))}
+          <PlusIcon className="fas fa-plus-square" />
         </RepositoryContainer>
         <IssueContainer>
           {!issues ? (
