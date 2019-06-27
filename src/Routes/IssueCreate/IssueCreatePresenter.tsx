@@ -1,23 +1,58 @@
 import React from "react";
 import styled from "styled-components";
 import Repository from "../../Components/Repository";
+import Issue from "../../Components/Issue";
 
 const Container = styled.div`
   width: 100%;
   align-items: center;
-  height: 50rem;
+  height: 45rem;
 `;
 
 const IssueSelector = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr;
-  height: 35rem;
-  overflow-y: scroll;
+  height: 30rem;
 `;
 
-const RepositoryContainer = styled.div``;
+const RepositoryTitle = styled.div`
+  margin-bottom: 0.5rem;
+  font-size: 1rem;
+  font-weight: 700;
+`;
 
-const IssueContainer = styled.div``;
+const IssueTitle = styled.div`
+  margin-bottom: 0.5rem;
+  font-size: 1rem;
+  font-weight: 700;
+`;
+
+const RepositoryContainer = styled.div`
+  overflow-y: scroll;
+  overflow-x: visible;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  unicode-bidi: bidi-override;
+  direction: rtl;
+  padding-left: 0.5rem;
+  ::-webkit-scrollbar-track {
+    border-radius: 10px;
+    background-color: #f5f5f5;
+  }
+  ::-webkit-scrollbar {
+    width: 0.5rem;
+    background-color: #f5f5f5;
+  }
+  ::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    background-color: #4e7cff;
+  }
+`;
+
+const IssueContainer = styled.div`
+  overflow-y: auto;
+`;
 
 const RestSelector = styled.div`
   height: 10rem;
@@ -25,6 +60,7 @@ const RestSelector = styled.div`
   display: flex;
   align-items: center;
   justify-content: flex-start;
+  background-color: white;
 `;
 
 const ProfileContainer = styled.div`
@@ -49,17 +85,23 @@ const Nickname = styled.div`
 `;
 
 interface Props {
-  repositories: any;
+  repositories: unknown[];
+  issues: unknown[];
   handleOnClickRepository: (repo: unknown) => void;
+  handleOnClickIssue: (issue: unknown) => void;
 }
 
 const IssueCreatePresenter: React.SFC<Props> = ({
   repositories,
-  handleOnClickRepository
+  issues,
+  handleOnClickRepository,
+  handleOnClickIssue
 }) => {
   return (
     <Container>
       <IssueSelector>
+        <RepositoryTitle>Your Repository</RepositoryTitle>
+        <IssueTitle>Issue</IssueTitle>
         <RepositoryContainer>
           {repositories.map((repository: any) => (
             <Repository
@@ -68,7 +110,11 @@ const IssueCreatePresenter: React.SFC<Props> = ({
             />
           ))}
         </RepositoryContainer>
-        <IssueContainer>issues</IssueContainer>
+        <IssueContainer>
+          {issues.map((issue: any) => (
+            <Issue handleOnClickIssue={handleOnClickIssue} issue={issue} />
+          ))}
+        </IssueContainer>
       </IssueSelector>
       <RestSelector>
         <ProfileContainer>

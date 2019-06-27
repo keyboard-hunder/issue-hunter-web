@@ -8,7 +8,7 @@ const ArrowIcon = styled.i`
 `;
 
 const Container = styled.div`
-  width: 100%;
+  width: 90%;
   background-color: white;
   padding: 0.5rem 1rem;
   margin-bottom: 0.5rem;
@@ -16,6 +16,25 @@ const Container = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
+  direction: ltr;
+  position: relative;
+  border-radius: 0.5rem;
+  :after {
+    content: "";
+    position: absolute;
+    border-style: solid;
+    /* reduce the damage in FF3.0 */
+    display: block;
+    width: 0;
+
+    top: 50%; /* controls vertical position */
+    transform: translateY(-50%);
+    right: -0.5rem; /* value = - border-left-width - border-right-width */
+    bottom: auto;
+    left: auto;
+    border-width: 0.5rem 0 0.5rem 0.5rem;
+    border-color: transparent white;
+  }
   cursor: pointer;
   &:hover {
     ${ArrowIcon} {

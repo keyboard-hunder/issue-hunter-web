@@ -14,7 +14,7 @@ const Container = styled(SharedContainer)``;
 const InnerContainer = styled(SharedInnerContainer)`
   flex-direction: column;
   justify-content: flex-start;
-  margin: 2rem 0;
+  margin: 2rem 0 1rem;
 `;
 
 const SectionContainer = styled.section`

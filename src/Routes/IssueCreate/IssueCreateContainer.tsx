@@ -7,7 +7,12 @@ interface Props {}
 
 interface State {
   loading: boolean;
-  repositories: unknown;
+  repositories: unknown[];
+  issues: unknown[];
+  price: number;
+  repository: unknown;
+  issue: unknown;
+  tags: unknown[];
 }
 
 export default class IssueCreateContainer extends React.Component<
@@ -16,11 +21,21 @@ export default class IssueCreateContainer extends React.Component<
 > {
   state = {
     loading: true,
-    repositories: []
+    repositories: [],
+    issues: [],
+    repository: null,
+    issue: null,
+    price: 0,
+    tags: []
   };
 
-  handleOnClickRepository = (repo: unknown) => {
-    console.log(repo);
+  handleOnClickRepository = (repository: unknown) => {
+    console.log(repository);
+    this.setState({ repository });
+  };
+
+  handleOnClickIssue = (issue: unknown) => {
+    console.log(issue);
   };
   componentDidMount = async () => {
     const jwt = localStorage.getItem("jwt");
@@ -36,13 +51,15 @@ export default class IssueCreateContainer extends React.Component<
     }
   };
   render() {
-    const { loading, repositories } = this.state;
+    const { loading, repositories, issues } = this.state;
     return loading ? (
       <Loading />
     ) : (
       <IssueCreatePresenter
         handleOnClickRepository={this.handleOnClickRepository}
+        handleOnClickIssue={this.handleOnClickIssue}
         repositories={repositories}
+        issues={issues}
       />
     );
   }
