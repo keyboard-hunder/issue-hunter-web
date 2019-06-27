@@ -3,49 +3,6 @@ const caver = new Caver('https://api.baobab.klaytn.net:8651/');
 
 var abi = [
 	{
-		"constant": true,
-		"inputs": [
-			{
-				"name": "",
-				"type": "uint256"
-			}
-		],
-		"name": "issues",
-		"outputs": [
-			{
-				"name": "id",
-				"type": "uint256"
-			},
-			{
-				"name": "owner",
-				"type": "address"
-			},
-			{
-				"name": "repo",
-				"type": "string"
-			},
-			{
-				"name": "title",
-				"type": "string"
-			},
-			{
-				"name": "price",
-				"type": "uint256"
-			},
-			{
-				"name": "solved",
-				"type": "bool"
-			},
-			{
-				"name": "active",
-				"type": "bool"
-			}
-		],
-		"payable": false,
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
 		"constant": false,
 		"inputs": [
 			{
@@ -57,29 +14,6 @@ var abi = [
 		"outputs": [],
 		"payable": false,
 		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"constant": true,
-		"inputs": [
-			{
-				"name": "",
-				"type": "address"
-			},
-			{
-				"name": "",
-				"type": "uint256"
-			}
-		],
-		"name": "issueSolvedBy",
-		"outputs": [
-			{
-				"name": "",
-				"type": "uint256"
-			}
-		],
-		"payable": false,
-		"stateMutability": "view",
 		"type": "function"
 	},
 	{
@@ -98,25 +32,16 @@ var abi = [
 	},
 	{
 		"constant": false,
-		"inputs": [],
-		"name": "renounceOwnership",
-		"outputs": [],
-		"payable": false,
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"constant": true,
-		"inputs": [],
-		"name": "erc20",
-		"outputs": [
+		"inputs": [
 			{
-				"name": "",
+				"name": "new_erc20",
 				"type": "address"
 			}
 		],
+		"name": "changeERC20",
+		"outputs": [],
 		"payable": false,
-		"stateMutability": "view",
+		"stateMutability": "nonpayable",
 		"type": "function"
 	},
 	{
@@ -136,7 +61,7 @@ var abi = [
 			},
 			{
 				"name": "tags",
-				"type": "string[]"
+				"type": "string"
 			},
 			{
 				"name": "active",
@@ -147,20 +72,6 @@ var abi = [
 		"outputs": [],
 		"payable": false,
 		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"constant": true,
-		"inputs": [],
-		"name": "owner",
-		"outputs": [
-			{
-				"name": "",
-				"type": "address"
-			}
-		],
-		"payable": false,
-		"stateMutability": "view",
 		"type": "function"
 	},
 	{
@@ -182,22 +93,38 @@ var abi = [
 		"type": "function"
 	},
 	{
-		"constant": true,
+		"constant": false,
 		"inputs": [
 			{
-				"name": "",
-				"type": "address"
-			}
-		],
-		"name": "githubId",
-		"outputs": [
-			{
-				"name": "",
+				"name": "repo",
 				"type": "string"
+			},
+			{
+				"name": "title",
+				"type": "string"
+			},
+			{
+				"name": "tags",
+				"type": "string"
+			},
+			{
+				"name": "price",
+				"type": "uint256"
 			}
 		],
+		"name": "makeIssue",
+		"outputs": [],
 		"payable": false,
-		"stateMutability": "view",
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"constant": false,
+		"inputs": [],
+		"name": "renounceOwnership",
+		"outputs": [],
+		"payable": false,
+		"stateMutability": "nonpayable",
 		"type": "function"
 	},
 	{
@@ -213,69 +140,6 @@ var abi = [
 			}
 		],
 		"name": "solve",
-		"outputs": [],
-		"payable": false,
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"constant": false,
-		"inputs": [
-			{
-				"name": "new_erc20",
-				"type": "address"
-			}
-		],
-		"name": "changeERC20",
-		"outputs": [],
-		"payable": false,
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"constant": true,
-		"inputs": [
-			{
-				"name": "",
-				"type": "address"
-			},
-			{
-				"name": "",
-				"type": "uint256"
-			}
-		],
-		"name": "issueMadeBy",
-		"outputs": [
-			{
-				"name": "",
-				"type": "uint256"
-			}
-		],
-		"payable": false,
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"constant": false,
-		"inputs": [
-			{
-				"name": "repo",
-				"type": "string"
-			},
-			{
-				"name": "title",
-				"type": "string"
-			},
-			{
-				"name": "tags",
-				"type": "string[]"
-			},
-			{
-				"name": "price",
-				"type": "uint256"
-			}
-		],
-		"name": "makeIssue",
 		"outputs": [],
 		"payable": false,
 		"stateMutability": "nonpayable",
@@ -334,10 +198,150 @@ var abi = [
 		],
 		"name": "OwnershipTransferred",
 		"type": "event"
+	},
+	{
+		"constant": true,
+		"inputs": [],
+		"name": "erc20",
+		"outputs": [
+			{
+				"name": "",
+				"type": "address"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [
+			{
+				"name": "",
+				"type": "address"
+			}
+		],
+		"name": "githubId",
+		"outputs": [
+			{
+				"name": "",
+				"type": "string"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [
+			{
+				"name": "",
+				"type": "address"
+			},
+			{
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"name": "issueMadeBy",
+		"outputs": [
+			{
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [
+			{
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"name": "issues",
+		"outputs": [
+			{
+				"name": "id",
+				"type": "uint256"
+			},
+			{
+				"name": "owner",
+				"type": "address"
+			},
+			{
+				"name": "repo",
+				"type": "string"
+			},
+			{
+				"name": "title",
+				"type": "string"
+			},
+			{
+				"name": "tags",
+				"type": "string"
+			},
+			{
+				"name": "price",
+				"type": "uint256"
+			},
+			{
+				"name": "solved",
+				"type": "bool"
+			},
+			{
+				"name": "active",
+				"type": "bool"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [
+			{
+				"name": "",
+				"type": "address"
+			},
+			{
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"name": "issueSolvedBy",
+		"outputs": [
+			{
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [],
+		"name": "owner",
+		"outputs": [
+			{
+				"name": "",
+				"type": "address"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
 	}
 ];
 
-var contractAddress = '0x5881083Fbcc8b99192e93958A2Ac6d21D9fe73b3';
+var contractAddress = '0x99a60B8cf67EE56d67e7cB56875b0C9c40C8E609';
 var myContract = new caver.klay.Contract(abi, contractAddress, {
     from: '0x1234567890123456789012345678901234567891', // default from address
     gasPrice: '25000000000' // default gas price in peb, 25 Gpeb in this case
@@ -375,4 +379,5 @@ function makeIssue(repoUrl, title, tags, price) {
 
 
 // example
-makeIssue("http://test.com", "testTitle", ["tet1", "tet2"], "27");
+loadOpenedIssues();
+// makeIssue("http://test.com22", "testTitle", "tet1/tet2", "1");
