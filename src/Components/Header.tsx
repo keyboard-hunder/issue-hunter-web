@@ -1,22 +1,14 @@
 import React from "react";
 import styled from "styled-components";
 import Search from "./Search";
+import { SharedContainer, SharedInnerContainer } from "../sharedStyle";
 
-const Container = styled.div`
-  width: 100%;
+const Container = styled(SharedContainer)`
   padding: 1rem 1rem;
   background-color: #8db0d3;
-  display: flex;
-  align-items: center;
-  justify-content: center;
 `;
 
-const InnerContainer = styled.div`
-  min-width: 30rem;
-  max-width: 50rem;
-  width: 100%;
-  display: flex;
-  align-items: center;
+const InnerContainer = styled(SharedInnerContainer)`
   justify-content: space-between;
 `;
 
