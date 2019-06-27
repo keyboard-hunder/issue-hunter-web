@@ -4,13 +4,14 @@ import styled from "../typed-components";
 interface Props {
   issue: IIssue;
   isActive: boolean;
-  handleOnClickIssue: (issue: unknown) => void;
+  handleOnClickIssue: (issue: string) => void;
 }
 
 interface State {}
 
 const Container = styled.div<{ isActive: boolean }>`
   width: 90%;
+  height: 2.5rem;
   background-color: ${({ isActive }) => (isActive ? "#427cff" : "white")};
   color: ${({ isActive }) => (isActive ? "white" : "black")};
   padding: 0.5rem 1rem;
@@ -22,6 +23,7 @@ const Container = styled.div<{ isActive: boolean }>`
   position: relative;
   border-radius: 0.5rem;
   transition: 0.5s ease-in-out;
+  cursor: pointer;
 `;
 
 interface IIssue {
@@ -43,7 +45,7 @@ export default class Issue extends React.Component<Props, State> {
     return (
       <Container
         isActive={isActive}
-        onClick={() => this.props.handleOnClickIssue(1)}
+        onClick={() => this.props.handleOnClickIssue(title)}
       >
         {title}
       </Container>

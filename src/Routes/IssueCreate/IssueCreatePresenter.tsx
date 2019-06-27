@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import Repository from "../../Components/Repository";
 import Issue from "../../Components/Issue";
+import Filter from "../../Components/Filter";
 
 const Container = styled.div`
   width: 100%;
@@ -57,13 +58,35 @@ const IssueContainer = styled.div`
 `;
 
 const RestSelector = styled.div`
-  height: 10rem;
+  height: 15rem;
   width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
   background-color: white;
+  border-radius: 0.5rem;
 `;
+
+const LeftTopContainer = styled.div`
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+`;
+
+const LeftBottomContainer = styled.div``;
+
+const LeftTopItem = styled.div`
+  padding: 1rem;
+`;
+
+const LeftTopTitle = styled.div`
+  font-size: 1rem;
+  font-weight: 700;
+  color: #4e7cff;
+  margin-bottom: 0.5rem;
+`;
+
+const LeftContainer = styled.div``;
+
+const LeftTopSubTitle = styled.div``;
 
 const ProfileContainer = styled.div`
   display: flex;
@@ -77,24 +100,30 @@ const ProfileImage = styled.div`
   background-position: center center;
   background-size: 100%;
   border-radius: 100%;
-  height: 4rem;
-  width: 4rem;
+  height: 3rem;
+  width: 3rem;
   margin: 1rem;
 `;
 const Nickname = styled.div`
-  font-size: 1.2rem;
+  font-size: 1rem;
   font-weight: 700;
 `;
 
-const PlusIcon = styled.i``;
+const PlusIcon = styled.i`
+  font-size: 1.5rem;
+`;
 
 interface Props {
   repositories: unknown[];
   issues: any;
-  targetRepository: unknown;
-  targetIssue: unknown;
-  handleOnClickRepository: (repo: unknown) => void;
-  handleOnClickIssue: (issue: unknown) => void;
+  tags: any;
+  targetRepository: string;
+  targetIssue: string;
+  noMoreRepository: boolean;
+  handleOnClickRepository: (repo: string) => void;
+  handleOnClickIssue: (issue: string) => void;
+  handleOnClickMoreRepository: () => Promise<void>;
+  toggleTag: (idx: number) => void;
 }
 
 const IssueCreatePresenter: React.SFC<Props> = ({
@@ -102,8 +131,12 @@ const IssueCreatePresenter: React.SFC<Props> = ({
   issues,
   targetRepository,
   targetIssue,
+  tags,
+  toggleTag,
+  noMoreRepository,
   handleOnClickRepository,
-  handleOnClickIssue
+  handleOnClickIssue,
+  handleOnClickMoreRepository
 }) => {
   return (
     <Container>
@@ -119,7 +152,12 @@ const IssueCreatePresenter: React.SFC<Props> = ({
               key={idx}
             />
           ))}
-          <PlusIcon className="fas fa-plus-square" />
+          {!noMoreRepository && (
+            <PlusIcon
+              onClick={() => handleOnClickMoreRepository()}
+              className="fas fa-plus-square"
+            />
+          )}
         </RepositoryContainer>
         <IssueContainer>
           {!issues ? (
@@ -127,7 +165,7 @@ const IssueCreatePresenter: React.SFC<Props> = ({
           ) : (
             issues.map((issue: any, idx: number) => (
               <Issue
-                isActive={issue === targetRepository}
+                isActive={issue.title === targetIssue}
                 handleOnClickIssue={handleOnClickIssue}
                 issue={issue}
                 key={idx}
@@ -137,10 +175,25 @@ const IssueCreatePresenter: React.SFC<Props> = ({
         </IssueContainer>
       </IssueSelector>
       <RestSelector>
-        <ProfileContainer>
-          <ProfileImage />
-          <Nickname>보노보노</Nickname>
-        </ProfileContainer>
+        <LeftContainer>
+          <LeftTopContainer>
+            <ProfileContainer>
+              <ProfileImage />
+              <Nickname>보노보노</Nickname>
+            </ProfileContainer>
+            <LeftTopItem>
+              <LeftTopTitle>Repository</LeftTopTitle>
+              <LeftTopSubTitle>{targetRepository}</LeftTopSubTitle>
+            </LeftTopItem>
+            <LeftTopItem>
+              <LeftTopTitle>Issue</LeftTopTitle>
+              <LeftTopSubTitle>{targetIssue}</LeftTopSubTitle>
+            </LeftTopItem>
+          </LeftTopContainer>
+          <LeftBottomContainer>
+            <Filter tags={tags} toggleTag={toggleTag} />
+          </LeftBottomContainer>
+        </LeftContainer>
         selector
       </RestSelector>
     </Container>

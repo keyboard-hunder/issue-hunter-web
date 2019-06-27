@@ -57,6 +57,10 @@ var abi = [
       {
         name: "active",
         type: "bool"
+      },
+      {
+        name: "imageURL",
+        type: "string"
       }
     ],
     name: "editIssueContents",
@@ -109,15 +113,14 @@ var abi = [
       {
         name: "price",
         type: "uint256"
+      },
+      {
+        name: "imageURL",
+        type: "string"
       }
     ],
     name: "makeIssue",
-    outputs: [
-      {
-        name: "new_id",
-        type: "uint256"
-      }
-    ],
+    outputs: [],
     payable: false,
     stateMutability: "nonpayable",
     type: "function"
@@ -342,6 +345,14 @@ var abi = [
       {
         name: "active",
         type: "bool"
+      },
+      {
+        name: "imageURL",
+        type: "string"
+      },
+      {
+        name: "timestamp",
+        type: "uint256"
       }
     ],
     payable: false,
@@ -397,6 +408,20 @@ var abi = [
   {
     constant: true,
     inputs: [],
+    name: "newId",
+    outputs: [
+      {
+        name: "",
+        type: "int256"
+      }
+    ],
+    payable: false,
+    stateMutability: "view",
+    type: "function"
+  },
+  {
+    constant: true,
+    inputs: [],
     name: "owner",
     outputs: [
       {
@@ -410,7 +435,7 @@ var abi = [
   }
 ];
 
-var contractAddress = "0x93c2312fDe900485e55648b883AE179066DA60Fe";
+var contractAddress = "0x6531f7AE930D56F7536E2CA9F3d2aF5dBb43De71";
 var myContract = new caver.klay.Contract(abi, contractAddress, {
   from: "0x1234567890123456789012345678901234567891", // default from address
   gasPrice: "25000000000" // default gas price in peb, 25 Gpeb in this case

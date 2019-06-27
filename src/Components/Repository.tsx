@@ -9,6 +9,7 @@ const ArrowIcon = styled.i`
 
 const Container = styled.div<{ isActive: boolean }>`
   width: 90%;
+  height: 2.5rem;
   background-color: ${({ isActive }) => (isActive ? "#427cff" : "white")};
   color: ${({ isActive }) => (isActive ? "white" : "black")};
   padding: 0.5rem 1rem;
@@ -62,7 +63,7 @@ const GitHubIcon = styled.i`
 interface Props {
   repository: any;
   isActive: boolean;
-  handleOnClickRepository: (repo: unknown) => void;
+  handleOnClickRepository: (repo: string) => void;
   key: number;
 }
 
