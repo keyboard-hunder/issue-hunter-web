@@ -10,8 +10,8 @@ interface State {
   repositories: unknown[];
   issues: unknown[];
   price: number;
-  repository: unknown;
-  issue: unknown;
+  targetRepository: unknown;
+  targetIssue: unknown;
   tags: unknown[];
 }
 
@@ -23,15 +23,15 @@ export default class IssueCreateContainer extends React.Component<
     loading: true,
     repositories: [],
     issues: [],
-    repository: null,
-    issue: null,
+    targetRepository: null,
+    targetIssue: null,
     price: 0,
     tags: []
   };
 
-  handleOnClickRepository = (repository: unknown) => {
-    console.log(repository);
-    this.setState({ repository });
+  handleOnClickRepository = (targetRepository: unknown) => {
+    console.log(targetRepository);
+    this.setState({ targetRepository });
   };
 
   handleOnClickIssue = (issue: unknown) => {
@@ -51,7 +51,13 @@ export default class IssueCreateContainer extends React.Component<
     }
   };
   render() {
-    const { loading, repositories, issues } = this.state;
+    const {
+      loading,
+      repositories,
+      issues,
+      targetRepository,
+      targetIssue
+    } = this.state;
     return loading ? (
       <Loading />
     ) : (
@@ -60,6 +66,8 @@ export default class IssueCreateContainer extends React.Component<
         handleOnClickIssue={this.handleOnClickIssue}
         repositories={repositories}
         issues={issues}
+        targetRepository={targetRepository}
+        targetIssue={targetIssue}
       />
     );
   }

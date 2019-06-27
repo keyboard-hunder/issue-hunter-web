@@ -87,6 +87,8 @@ const Nickname = styled.div`
 interface Props {
   repositories: unknown[];
   issues: unknown[];
+  targetRepository: unknown;
+  targetIssue: unknown;
   handleOnClickRepository: (repo: unknown) => void;
   handleOnClickIssue: (issue: unknown) => void;
 }
@@ -94,6 +96,8 @@ interface Props {
 const IssueCreatePresenter: React.SFC<Props> = ({
   repositories,
   issues,
+  targetRepository,
+  targetIssue,
   handleOnClickRepository,
   handleOnClickIssue
 }) => {
@@ -103,16 +107,23 @@ const IssueCreatePresenter: React.SFC<Props> = ({
         <RepositoryTitle>Your Repository</RepositoryTitle>
         <IssueTitle>Issue</IssueTitle>
         <RepositoryContainer>
-          {repositories.map((repository: any) => (
+          {repositories.map((repository: any, idx: number) => (
             <Repository
+              isActive={repository.id == targetRepository}
               handleOnClickRepository={handleOnClickRepository}
               repository={repository}
+              key={idx}
             />
           ))}
         </RepositoryContainer>
         <IssueContainer>
-          {issues.map((issue: any) => (
-            <Issue handleOnClickIssue={handleOnClickIssue} issue={issue} />
+          {issues.map((issue: any, idx: number) => (
+            <Issue
+              isActive={issue == targetRepository}
+              handleOnClickIssue={handleOnClickIssue}
+              issue={issue}
+              key={idx}
+            />
           ))}
         </IssueContainer>
       </IssueSelector>

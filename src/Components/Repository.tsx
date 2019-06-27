@@ -7,9 +7,10 @@ const ArrowIcon = styled.i`
   transition: 0.5s ease-in-out;
 `;
 
-const Container = styled.div`
+const Container = styled.div<{ isActive: boolean }>`
   width: 90%;
-  background-color: white;
+  background-color: ${({ isActive }) => (isActive ? "#427cff" : "white")};
+  color: ${({ isActive }) => (isActive ? "white" : "black")};
   padding: 0.5rem 1rem;
   margin-bottom: 0.5rem;
   font-weight: 700;
@@ -19,6 +20,7 @@ const Container = styled.div`
   direction: ltr;
   position: relative;
   border-radius: 0.5rem;
+  transition: 0.5s ease-in-out;
   :after {
     content: "";
     position: absolute;
@@ -26,14 +28,18 @@ const Container = styled.div`
     /* reduce the damage in FF3.0 */
     display: block;
     width: 0;
-
     top: 50%; /* controls vertical position */
     transform: translateY(-50%);
-    right: -0.5rem; /* value = - border-left-width - border-right-width */
+    transition: 0.5s ease-in-out;
+    right: ${({ isActive }) =>
+      isActive
+        ? "-0.5rem"
+        : "0rem"}; /* value = - border-left-width - border-right-width */
     bottom: auto;
     left: auto;
     border-width: 0.5rem 0 0.5rem 0.5rem;
-    border-color: transparent white;
+    border-color: transparent
+      ${({ isActive }) => (isActive ? "#427cff" : "white")};
   }
   cursor: pointer;
   &:hover {
@@ -55,7 +61,9 @@ const GitHubIcon = styled.i`
 
 interface Props {
   repository: any;
+  isActive: boolean;
   handleOnClickRepository: (repo: unknown) => void;
+  key: number;
 }
 
 interface State {}
@@ -63,15 +71,20 @@ interface State {}
 export default class Repository extends React.Component<Props, State> {
   render() {
     const {
-      repository: { name }
+      repository: { id, name },
+      isActive
     } = this.props;
+    console.log(id);
     return (
-      <Container onClick={() => this.props.handleOnClickRepository(name)}>
+      <Container
+        isActive={isActive}
+        onClick={() => this.props.handleOnClickRepository(id)}
+      >
         <LeftContainer>
           <GitHubIcon className="fab fa-github" />
           {name}
         </LeftContainer>
-        <ArrowIcon className="fas fa-chevron-right" />
+        {!isActive && <ArrowIcon className="fas fa-chevron-right" />}
       </Container>
     );
   }
