@@ -12,6 +12,7 @@ const Tag = styled(AtdTag)`
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  cursor: pointer;
 `;
 
 interface Props {

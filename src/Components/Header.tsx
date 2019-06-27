@@ -2,6 +2,8 @@ import React from "react";
 import styled from "styled-components";
 import Search from "./Search";
 import { SharedContainer, SharedInnerContainer } from "../sharedStyle";
+import GitHubLogin from "./GitHubLogin";
+import { Link } from "react-router-dom";
 
 const Container = styled(SharedContainer)`
   padding: 1rem 1rem;
@@ -24,11 +26,6 @@ const ButtonContainer = styled.div`
   justify-content: space-between;
 `;
 
-const Button = styled.button`
-  font-weight: 700;
-  padding: 0.5rem;
-`;
-
 interface State {}
 
 interface Props {}
@@ -38,13 +35,12 @@ export default class Header extends React.Component<State, Props> {
     return (
       <Container>
         <InnerContainer>
-          <Logo>Issue Hunter</Logo>
+          <Logo>
+            <Link to="/">Issue Hunter</Link>
+          </Logo>
           <Search />
           <ButtonContainer>
-            <Button style={{ color: "white", backgroundColor: "black" }}>
-              Sign In
-            </Button>
-            <Button>Log In</Button>
+            <GitHubLogin />
           </ButtonContainer>
         </InnerContainer>
       </Container>

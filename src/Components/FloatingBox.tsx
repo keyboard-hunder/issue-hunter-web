@@ -1,13 +1,19 @@
 import React from "react";
 import styled from "styled-components";
+import Filter from "./Filter";
 
 const Container = styled.div`
-  background-color: white;
-  width: 15rem;
-  max-height: 10rem;
-  padding: 1rem;
   position: sticky;
   top: 1rem;
+  max-height: 20rem;
+  display: flex;
+  flex-direction: column;
+`;
+const ProfileContainer = styled.div`
+  background-color: white;
+  max-height: 10rem;
+  padding: 1rem;
+  margin-bottom: 0.5rem;
 `;
 
 const UserProfile = styled.div`
@@ -55,14 +61,17 @@ export default class FloatingBox extends React.Component<Props, State> {
   render() {
     return (
       <Container>
-        <UserProfile>
-          <ProfileImg />
-          <Nickname>보노보노</Nickname>
-        </UserProfile>
-        <ButtonContainer>
-          <Button>내 글보기</Button>
-          <Button>글 작성하기</Button>
-        </ButtonContainer>
+        <ProfileContainer>
+          <UserProfile>
+            <ProfileImg />
+            <Nickname>보노보노</Nickname>
+          </UserProfile>
+          <ButtonContainer>
+            <Button>내 글보기</Button>
+            <Button>글 작성하기</Button>
+          </ButtonContainer>
+        </ProfileContainer>
+        <Filter />
       </Container>
     );
   }

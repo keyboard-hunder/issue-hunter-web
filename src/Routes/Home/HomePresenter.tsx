@@ -6,7 +6,6 @@ import FloatingBox from "../../Components/FloatingBox";
 const Container = styled.div`
   display: flex;
   justify-content: flex-start;
-  margin: 3rem 0;
 `;
 
 const IssueItemList = styled.div`

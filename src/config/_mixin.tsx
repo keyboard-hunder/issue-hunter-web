@@ -6,6 +6,8 @@ const sizes = {
   phone: 576
 };
 
+export const baseURL = "http://localhost:3000";
+
 export const fontSize = {
   smallFontSize: "9px",
   normalFontSize: "12px",
@@ -19,7 +21,7 @@ export const headerHeight = "6rem";
 export const color = {
   bgColor: "#EAEAEA",
   fontColor: "#121212",
-  mainColor: "#f6e58d",
+  mainColor: "skyblue",
   html: "#f16524",
   css: "#1da1f2",
   js: "#fb9e21",

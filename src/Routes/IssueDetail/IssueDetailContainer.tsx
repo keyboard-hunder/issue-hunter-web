@@ -24,6 +24,6 @@ export default class IssueDetailContainer extends React.Component<
         params: { issue_id }
       }
     } = this.props;
-    return <IssueDetailPresenter issue_id={issue_id} />;
+    return <IssueDetailPresenter issue_id={issue_id} tags={["html", "css"]} />;
   }
 }

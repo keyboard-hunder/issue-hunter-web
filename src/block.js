@@ -1,4 +1,5 @@
-const Caver = require("caver-js");
+// const Caver = require("caver-js");
+import Caver from "caver-js";
 const caver = new Caver("https://api.baobab.klaytn.net:8651/");
 
 var abi = [
