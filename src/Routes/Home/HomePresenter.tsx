@@ -6,6 +6,7 @@ import FloatingBox from "../../Components/FloatingBox";
 const Container = styled.div`
   display: flex;
   justify-content: flex-start;
+  width: 100%;
 `;
 
 const IssueItemList = styled.div`
@@ -18,13 +19,17 @@ const IssueItemList = styled.div`
 
 interface Props {
   tags: number[];
+  issues: any;
   toggleTag: (idx: number) => void;
 }
 
-const HomePresenter: React.SFC<Props> = ({ tags, toggleTag }) => {
+const HomePresenter: React.SFC<Props> = ({ tags, toggleTag, issues }) => {
   return (
     <Container>
       <IssueItemList>
+        {issues.map((issue: any, idx: number) => (
+          <IssueItem issue={issue} key={idx} />
+        ))}
         <IssueItem />
         <IssueItem />
         <IssueItem />

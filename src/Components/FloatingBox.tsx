@@ -3,7 +3,7 @@ import styled from "styled-components";
 import Filter from "./Filter";
 import GitHubLogin from "./GitHubLogin";
 import Search from "./Search";
-import { Link } from "react-router-dom";
+import { Link, RouteComponentProps, withRouter } from "react-router-dom";
 
 const Container = styled.div`
   position: sticky;
@@ -12,11 +12,13 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
 `;
+
 const ProfileContainer = styled.div`
   background-color: white;
-  max-height: 10rem;
+  max-height: 12rem;
   padding: 1rem;
   margin-bottom: 0.5rem;
+  border-radius: 0.5rem;
 `;
 
 const UserProfile = styled.div`
@@ -48,26 +50,32 @@ const ButtonContainer = styled.div`
 `;
 
 const Button = styled.button`
-  background-color: #121212;
+  background-color: #4e7cff;
   width: 100%;
   color: white;
   font-weight: 700;
   padding: 0.5rem;
   margin-top: 0.5rem;
+  border-radius: 1rem;
 `;
 
 const Disqus = styled.div`
   padding: 0 0.2rem;
 `;
 
-interface Props {
+interface Props extends RouteComponentProps {
   toggleTag: (idx: number) => void;
   tags: number[];
 }
 
 interface State {}
 
-export default class FloatingBox extends React.Component<Props, State> {
+class FloatingBox extends React.Component<Props, State> {
+  onClickLogOut = () => {
+    localStorage.removeItem("jwt");
+    console.log(this.props);
+    this.props.history.push("/");
+  };
   render() {
     const isLogin = Boolean(localStorage.getItem("jwt"));
     return (
@@ -84,7 +92,7 @@ export default class FloatingBox extends React.Component<Props, State> {
               <Link style={{ width: "100%" }} to={"/issue-create"}>
                 <Button>글 작성하기</Button>
               </Link>
-              <Button>로그아웃</Button>
+              <Button onClick={this.onClickLogOut}>로그아웃</Button>
             </ButtonContainer>
           </ProfileContainer>
         ) : (
@@ -97,3 +105,5 @@ export default class FloatingBox extends React.Component<Props, State> {
     );
   }
 }
+
+export default withRouter(FloatingBox);

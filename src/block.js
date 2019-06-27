@@ -4,81 +4,31 @@ const caver = new Caver("https://api.baobab.klaytn.net:8651/");
 
 var abi = [
   {
-    constant: true,
+    constant: false,
     inputs: [
       {
-        name: "",
-        type: "uint256"
+        name: "github_id",
+        type: "string"
       }
     ],
-    name: "issues",
-    outputs: [
-      {
-        name: "id",
-        type: "uint256"
-      },
-      {
-        name: "owner",
-        type: "address"
-      },
-      {
-        name: "repoURL",
-        type: "string"
-      },
-      {
-        name: "issueNumber",
-        type: "uint256"
-      },
-      {
-        name: "title",
-        type: "string"
-      },
-      {
-        name: "tags",
-        type: "string"
-      },
-      {
-        name: "price",
-        type: "uint256"
-      },
-      {
-        name: "solved",
-        type: "bool"
-      },
-      {
-        name: "active",
-        type: "bool"
-      },
-      {
-        name: "imageURL",
-        type: "string"
-      },
-      {
-        name: "timestamp",
-        type: "uint256"
-      }
-    ],
+    name: "applyAccount",
+    outputs: [],
     payable: false,
-    stateMutability: "view",
+    stateMutability: "nonpayable",
     type: "function"
   },
   {
-    constant: true,
+    constant: false,
     inputs: [
       {
-        name: "githubId",
-        type: "string"
-      }
-    ],
-    name: "getAddressByGithubId",
-    outputs: [
-      {
-        name: "",
+        name: "new_erc20",
         type: "address"
       }
     ],
+    name: "changeERC20",
+    outputs: [],
     payable: false,
-    stateMutability: "view",
+    stateMutability: "nonpayable",
     type: "function"
   },
   {
@@ -107,10 +57,6 @@ var abi = [
       {
         name: "active",
         type: "bool"
-      },
-      {
-        name: "imageURL",
-        type: "string"
       }
     ],
     name: "editIssueContents",
@@ -123,11 +69,15 @@ var abi = [
     constant: false,
     inputs: [
       {
-        name: "github_id",
-        type: "string"
+        name: "_id",
+        type: "uint256"
+      },
+      {
+        name: "price",
+        type: "uint256"
       }
     ],
-    name: "applyAccount",
+    name: "editIssuePrice",
     outputs: [],
     payable: false,
     stateMutability: "nonpayable",
@@ -159,10 +109,6 @@ var abi = [
       {
         name: "price",
         type: "uint256"
-      },
-      {
-        name: "imageURL",
-        type: "string"
       }
     ],
     name: "makeIssue",
@@ -177,142 +123,12 @@ var abi = [
     type: "function"
   },
   {
-    constant: true,
-    inputs: [
-      {
-        name: "repoURL",
-        type: "string"
-      },
-      {
-        name: "issueNumber",
-        type: "uint256"
-      }
-    ],
-    name: "matchedIssue",
-    outputs: [
-      {
-        name: "id",
-        type: "uint256"
-      }
-    ],
-    payable: false,
-    stateMutability: "view",
-    type: "function"
-  },
-  {
-    constant: true,
-    inputs: [
-      {
-        name: "",
-        type: "address"
-      },
-      {
-        name: "",
-        type: "uint256"
-      }
-    ],
-    name: "issueSolvedBy",
-    outputs: [
-      {
-        name: "",
-        type: "uint256"
-      }
-    ],
-    payable: false,
-    stateMutability: "view",
-    type: "function"
-  },
-  {
     constant: false,
     inputs: [],
     name: "renounceOwnership",
     outputs: [],
     payable: false,
     stateMutability: "nonpayable",
-    type: "function"
-  },
-  {
-    constant: true,
-    inputs: [
-      {
-        name: "",
-        type: "string"
-      }
-    ],
-    name: "githubToAddress",
-    outputs: [
-      {
-        name: "",
-        type: "address"
-      }
-    ],
-    payable: false,
-    stateMutability: "view",
-    type: "function"
-  },
-  {
-    constant: true,
-    inputs: [],
-    name: "erc20",
-    outputs: [
-      {
-        name: "",
-        type: "address"
-      }
-    ],
-    payable: false,
-    stateMutability: "view",
-    type: "function"
-  },
-  {
-    constant: true,
-    inputs: [],
-    name: "owner",
-    outputs: [
-      {
-        name: "",
-        type: "address"
-      }
-    ],
-    payable: false,
-    stateMutability: "view",
-    type: "function"
-  },
-  {
-    constant: false,
-    inputs: [
-      {
-        name: "_id",
-        type: "uint256"
-      },
-      {
-        name: "price",
-        type: "uint256"
-      }
-    ],
-    name: "editIssuePrice",
-    outputs: [],
-    payable: false,
-    stateMutability: "nonpayable",
-    type: "function"
-  },
-  {
-    constant: true,
-    inputs: [
-      {
-        name: "",
-        type: "address"
-      }
-    ],
-    name: "addressToGithub",
-    outputs: [
-      {
-        name: "",
-        type: "string"
-      }
-    ],
-    payable: false,
-    stateMutability: "view",
     type: "function"
   },
   {
@@ -331,43 +147,6 @@ var abi = [
     outputs: [],
     payable: false,
     stateMutability: "nonpayable",
-    type: "function"
-  },
-  {
-    constant: false,
-    inputs: [
-      {
-        name: "new_erc20",
-        type: "address"
-      }
-    ],
-    name: "changeERC20",
-    outputs: [],
-    payable: false,
-    stateMutability: "nonpayable",
-    type: "function"
-  },
-  {
-    constant: true,
-    inputs: [
-      {
-        name: "",
-        type: "address"
-      },
-      {
-        name: "",
-        type: "uint256"
-      }
-    ],
-    name: "issueMadeBy",
-    outputs: [
-      {
-        name: "",
-        type: "uint256"
-      }
-    ],
-    payable: false,
-    stateMutability: "view",
     type: "function"
   },
   {
@@ -423,6 +202,211 @@ var abi = [
     ],
     name: "OwnershipTransferred",
     type: "event"
+  },
+  {
+    constant: true,
+    inputs: [
+      {
+        name: "",
+        type: "address"
+      }
+    ],
+    name: "addressToGithub",
+    outputs: [
+      {
+        name: "",
+        type: "string"
+      }
+    ],
+    payable: false,
+    stateMutability: "view",
+    type: "function"
+  },
+  {
+    constant: true,
+    inputs: [],
+    name: "erc20",
+    outputs: [
+      {
+        name: "",
+        type: "address"
+      }
+    ],
+    payable: false,
+    stateMutability: "view",
+    type: "function"
+  },
+  {
+    constant: true,
+    inputs: [
+      {
+        name: "githubId",
+        type: "string"
+      }
+    ],
+    name: "getAddressByGithubId",
+    outputs: [
+      {
+        name: "",
+        type: "address"
+      }
+    ],
+    payable: false,
+    stateMutability: "view",
+    type: "function"
+  },
+  {
+    constant: true,
+    inputs: [
+      {
+        name: "",
+        type: "string"
+      }
+    ],
+    name: "githubToAddress",
+    outputs: [
+      {
+        name: "",
+        type: "address"
+      }
+    ],
+    payable: false,
+    stateMutability: "view",
+    type: "function"
+  },
+  {
+    constant: true,
+    inputs: [
+      {
+        name: "",
+        type: "address"
+      },
+      {
+        name: "",
+        type: "uint256"
+      }
+    ],
+    name: "issueMadeBy",
+    outputs: [
+      {
+        name: "",
+        type: "uint256"
+      }
+    ],
+    payable: false,
+    stateMutability: "view",
+    type: "function"
+  },
+  {
+    constant: true,
+    inputs: [
+      {
+        name: "",
+        type: "uint256"
+      }
+    ],
+    name: "issues",
+    outputs: [
+      {
+        name: "id",
+        type: "uint256"
+      },
+      {
+        name: "owner",
+        type: "address"
+      },
+      {
+        name: "repoURL",
+        type: "string"
+      },
+      {
+        name: "issueNumber",
+        type: "uint256"
+      },
+      {
+        name: "title",
+        type: "string"
+      },
+      {
+        name: "tags",
+        type: "string"
+      },
+      {
+        name: "price",
+        type: "uint256"
+      },
+      {
+        name: "solved",
+        type: "bool"
+      },
+      {
+        name: "active",
+        type: "bool"
+      }
+    ],
+    payable: false,
+    stateMutability: "view",
+    type: "function"
+  },
+  {
+    constant: true,
+    inputs: [
+      {
+        name: "",
+        type: "address"
+      },
+      {
+        name: "",
+        type: "uint256"
+      }
+    ],
+    name: "issueSolvedBy",
+    outputs: [
+      {
+        name: "",
+        type: "uint256"
+      }
+    ],
+    payable: false,
+    stateMutability: "view",
+    type: "function"
+  },
+  {
+    constant: true,
+    inputs: [
+      {
+        name: "repoURL",
+        type: "string"
+      },
+      {
+        name: "issueNumber",
+        type: "uint256"
+      }
+    ],
+    name: "matchedIssue",
+    outputs: [
+      {
+        name: "id",
+        type: "uint256"
+      }
+    ],
+    payable: false,
+    stateMutability: "view",
+    type: "function"
+  },
+  {
+    constant: true,
+    inputs: [],
+    name: "owner",
+    outputs: [
+      {
+        name: "",
+        type: "address"
+      }
+    ],
+    payable: false,
+    stateMutability: "view",
+    type: "function"
   }
 ];
 
@@ -441,14 +425,15 @@ export function loadOpenedIssues(callback) {
   loadIssue(0, callback);
 }
 
-function loadIssue(idx, callback) {
+export function loadIssue(idx, callback) {
   myContract.methods
     .issues(idx)
     .call({ from: contractAddress }, function(error, result) {
       if (result !== undefined) {
         if (callback) callback(result);
-        else console.log(result);
-        loadIssue(idx + 1);
+        else {
+          console.log("there's no callback");
+        }
       }
     });
 }
@@ -468,5 +453,5 @@ export function applyAccount(github_id, keystore, password) {
 }
 
 function keystore2Account(keystore, password) {
-    return caver.klay.accounts.decrypt(keystore, password);
+  return caver.klay.accounts.decrypt(keystore, password);
 }

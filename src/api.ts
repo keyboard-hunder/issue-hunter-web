@@ -5,7 +5,7 @@ import axios from "axios";
 // const baseApi = axios.create({ baseURL: githubBaseURL });
 
 const serverBaseURL =
-  "http://ec2-13-125-125-149.ap-northeast-2.compute.amazonaws.com:8000/";
+  "http://ec2-52-79-203-132.ap-northeast-2.compute.amazonaws.com:8000/";
 const serverBaseAPI = axios.create({ baseURL: serverBaseURL });
 
 export const serverLoginAPIs = {

@@ -13,6 +13,7 @@ const Container = styled.div`
   background-color: white;
   padding: 1rem;
   margin-bottom: 0.5rem;
+  border-radius: 0.5rem;
 `;
 
 const TagContainer = styled.div`
@@ -40,7 +41,7 @@ export default class Filter extends React.Component<Props, State> {
         <Title>태그</Title>
         <TagContainer>
           {PLTags.map((tag, idx) => (
-            <TagWrapper onClick={() => this.props.toggleTag(idx)}>
+            <TagWrapper key={idx} onClick={() => this.props.toggleTag(idx)}>
               <PLTag disable={tags.indexOf(idx) === -1} key={idx} pl={tag} />
             </TagWrapper>
           ))}

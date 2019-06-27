@@ -6,22 +6,24 @@ import Issue from "../../Components/Issue";
 const Container = styled.div`
   width: 100%;
   align-items: center;
-  height: 45rem;
+  height: 50rem;
 `;
 
 const IssueSelector = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr;
-  height: 30rem;
+  height: 23.3rem;
+  margin-bottom: 1rem;
 `;
 
 const RepositoryTitle = styled.div`
-  margin-bottom: 0.5rem;
+  padding: 0.5rem 1rem;
   font-size: 1rem;
   font-weight: 700;
 `;
 
 const IssueTitle = styled.div`
+  padding: 0.5rem 1rem;
   margin-bottom: 0.5rem;
   font-size: 1rem;
   font-weight: 700;
@@ -45,8 +47,8 @@ const RepositoryContainer = styled.div`
     background-color: #f5f5f5;
   }
   ::-webkit-scrollbar-thumb {
-    border-radius: 10px;
-    background-color: #4e7cff;
+    border-radius: 2rem;
+    background-color: #ffc645;
   }
 `;
 
@@ -122,7 +124,7 @@ const IssueCreatePresenter: React.SFC<Props> = ({
           ) : (
             issues.map((issue: any, idx: number) => (
               <Issue
-                isActive={issue == targetRepository}
+                isActive={issue === targetRepository}
                 handleOnClickIssue={handleOnClickIssue}
                 issue={issue}
                 key={idx}

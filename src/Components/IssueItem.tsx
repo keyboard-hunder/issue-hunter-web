@@ -8,7 +8,7 @@ const NumericContainer = styled.div`
   display: flex;
   justify-content: space-evenly;
   color: grey;
-  background-color: #4e7cff;
+  background-color: #0036d1;
   transition: 0.5s ease-in-out;
   border-top-right-radius: 0.5rem;
   border-bottom-right-radius: 0.5rem;
@@ -19,10 +19,10 @@ const Container = styled.div`
   background-color: white;
   border-radius: 0.5rem;
   padding-left: 1rem;
-  min-height: 6rem;
+  min-height: 8rem;
   &:hover {
     ${NumericContainer} {
-      background-color: #0036d1;
+      background-color: darkblue;
     }
   }
 `;
@@ -38,9 +38,7 @@ const IssueText = styled.div`
   cursor: pointer;
 `;
 
-// const IssueContent = styled.div`
-//   margin: 0.2rem 0 1rem 0;
-// `;
+const TimeText = styled.div``;
 
 const TagContainer = styled.div`
   line-height: 2;
@@ -51,6 +49,7 @@ const MainContainer = styled.div`
   flex-direction: column;
   width: 100%;
   padding: 1rem 0;
+  padding-right: 1rem;
 `;
 
 const NumericItem = styled.div`
@@ -94,13 +93,22 @@ const Nickname = styled.div`
   font-weight: 700;
 `;
 
-interface Props {}
+const ThirdContainer = styled.div`
+  display: flex;
+  justify-content: space-between;
+`;
+
+interface Props {
+  issue?: any;
+}
 
 interface State {}
 
 export default class IssueItem extends React.Component<Props, State> {
   render() {
-    return (
+    const { issue } = this.props;
+    console.log(issue);
+    return issue ? (
       <Container>
         <ProfileContainer>
           <ProfileImage />
@@ -111,18 +119,44 @@ export default class IssueItem extends React.Component<Props, State> {
           <IssueText>
             <Link to="/issue-detail/1">[KH] 키보드 버그</Link>
           </IssueText>
-          {/* <IssueContent>
-            키보드가 한 번 누를 시 무한대로 눌러지는 버그입니다. 키보드가 한 번
-            누를 시 무한대로 눌러지는 버그입니다. 키보드가 한 번 누를 시
-            무한대로 눌러지는 버그입니다. 키보드가 한 번 누를 시 무한대로
-            눌러지는 버그입니다.
-          </IssueContent> */}
-          <TagContainer>
-            <PLTag pl="html" />
-            <PLTag pl="css" />
-            <PLTag pl="js" />
-            <PLTag pl="react" />
-          </TagContainer>
+          <ThirdContainer>
+            <TagContainer>
+              <PLTag pl="html" />
+              <PLTag pl="css" />
+              <PLTag pl="js" />
+              <PLTag pl="react" />
+            </TagContainer>
+            <TimeText>30분 전</TimeText>
+          </ThirdContainer>
+        </MainContainer>
+
+        <NumericContainer>
+          <NumericItem>
+            <NumericNum>₭ 0.002</NumericNum>
+            <KlaytnIcon src={Klaytn} />
+          </NumericItem>
+        </NumericContainer>
+      </Container>
+    ) : (
+      <Container>
+        <ProfileContainer>
+          <ProfileImage />
+          <Nickname>보노보노</Nickname>
+        </ProfileContainer>
+        <MainContainer>
+          <RepoText>Keyboard-hunter</RepoText>
+          <IssueText>
+            <Link to="/issue-detail/1">[KH] 키보드 버그</Link>
+          </IssueText>
+          <ThirdContainer>
+            <TagContainer>
+              <PLTag pl="html" />
+              <PLTag pl="css" />
+              <PLTag pl="js" />
+              <PLTag pl="react" />
+            </TagContainer>
+            <TimeText>30분 전</TimeText>
+          </ThirdContainer>
         </MainContainer>
 
         <NumericContainer>

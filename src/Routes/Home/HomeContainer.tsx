@@ -1,12 +1,14 @@
 import React from "react";
 import HomePresenter from "./HomePresenter";
-import { loadOpenedIssues } from "../../block";
+import { loadIssue } from "../../block";
+import { Loading } from "../../Components/Loading";
 
 interface Props {}
 
 interface State {
   tags: number[];
   searchTerm: string;
+  issues: any;
 }
 
 export default class HomeContainer extends React.Component<Props, State> {
@@ -14,14 +16,15 @@ export default class HomeContainer extends React.Component<Props, State> {
     super(props);
     this.state = {
       tags: [],
-      searchTerm: ""
+      searchTerm: "",
+      issues: null
     };
   }
 
   toggleTag = (idx: number) => {
     const { tags } = this.state;
     const index = tags.indexOf(idx);
-    if (index != -1) {
+    if (index !== -1) {
       tags.splice(index, 1);
       this.setState({ tags });
     } else {
@@ -30,9 +33,30 @@ export default class HomeContainer extends React.Component<Props, State> {
     }
   };
 
+  handleSetTags = (item: any) => {
+    console.log(item);
+  };
+
+  componentDidMount = async () => {
+    let issues = [];
+    const range = 10;
+    for (let i = 0; i < range; i++) {
+      issues.push(loadIssue(i, this.handleSetTags));
+    }
+    this.setState({ issues });
+  };
+
   render() {
+    const { issues } = this.state;
     console.log(this.state);
-    loadOpenedIssues();
-    return <HomePresenter tags={this.state.tags} toggleTag={this.toggleTag} />;
+    return !issues ? (
+      <Loading />
+    ) : (
+      <HomePresenter
+        issues={issues}
+        tags={this.state.tags}
+        toggleTag={this.toggleTag}
+      />
+    );
   }
 }

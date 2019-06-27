@@ -9,7 +9,10 @@ import { SharedContainer, SharedInnerContainer } from "./sharedStyle";
 import Oauth from "./Routes/Oauth";
 import IssueCreate from "./Routes/IssueCreate";
 
-const Container = styled(SharedContainer)``;
+const Container = styled(SharedContainer)`
+  position: relative;
+  z-index: 2;
+`;
 
 const InnerContainer = styled(SharedInnerContainer)`
   flex-direction: column;
@@ -19,6 +22,8 @@ const InnerContainer = styled(SharedInnerContainer)`
 
 const SectionContainer = styled.section`
   width: 100%;
+  position: absolute;
+  top: 6rem;
 `;
 interface Props {}
 
