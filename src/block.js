@@ -437,14 +437,20 @@ function loadIssue(idx, callback) {
     });
 }
 
-export function applyAccount(github_id) {
+export function applyAccount(github_id, keystore, password) {
+  // keystore : json(object), password : string
+  var myAccount = keystore2Account(keystore, password);
   myContract.methods.applyAccount(github_id).send(
     {
       from: myAccount.address,
-      gas: "500000" // fixed
+      gas: "5000000" // fixed
     },
     function(error, transactionHash) {
       console.log(transactionHash);
     }
   );
+}
+
+function keystore2Account(keystore, password) {
+    return caver.klay.accounts.decrypt(keystore, password);
 }
