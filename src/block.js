@@ -22,11 +22,19 @@ var abi = [
         type: "address"
       },
       {
-        name: "repo",
+        name: "repoURL",
         type: "string"
       },
       {
+        name: "issueNumber",
+        type: "uint256"
+      },
+      {
         name: "title",
+        type: "string"
+      },
+      {
+        name: "tags",
         type: "string"
       },
       {
@@ -61,6 +69,40 @@ var abi = [
     type: "function"
   },
   {
+    constant: false,
+    inputs: [
+      {
+        name: "_id",
+        type: "uint256"
+      },
+      {
+        name: "repo",
+        type: "string"
+      },
+      {
+        name: "issueNumber",
+        type: "uint256"
+      },
+      {
+        name: "title",
+        type: "string"
+      },
+      {
+        name: "tags",
+        type: "string"
+      },
+      {
+        name: "active",
+        type: "bool"
+      }
+    ],
+    name: "editIssueContents",
+    outputs: [],
+    payable: false,
+    stateMutability: "nonpayable",
+    type: "function"
+  },
+  {
     constant: true,
     inputs: [
       {
@@ -85,25 +127,30 @@ var abi = [
   },
   {
     constant: false,
-    inputs: [
-      {
-        name: "new_address",
-        type: "address"
-      }
-    ],
-    name: "assignAccountToNewAddress",
+    inputs: [],
+    name: "renounceOwnership",
     outputs: [],
     payable: false,
     stateMutability: "nonpayable",
     type: "function"
   },
   {
-    constant: false,
-    inputs: [],
-    name: "renounceOwnership",
-    outputs: [],
+    constant: true,
+    inputs: [
+      {
+        name: "",
+        type: "string"
+      }
+    ],
+    name: "githubToAddress",
+    outputs: [
+      {
+        name: "",
+        type: "address"
+      }
+    ],
     payable: false,
-    stateMutability: "nonpayable",
+    stateMutability: "view",
     type: "function"
   },
   {
@@ -118,36 +165,6 @@ var abi = [
     ],
     payable: false,
     stateMutability: "view",
-    type: "function"
-  },
-  {
-    constant: false,
-    inputs: [
-      {
-        name: "_id",
-        type: "uint256"
-      },
-      {
-        name: "repo",
-        type: "string"
-      },
-      {
-        name: "title",
-        type: "string"
-      },
-      {
-        name: "tags",
-        type: "string[]"
-      },
-      {
-        name: "active",
-        type: "bool"
-      }
-    ],
-    name: "editIssueContents",
-    outputs: [],
-    payable: false,
-    stateMutability: "nonpayable",
     type: "function"
   },
   {
@@ -190,7 +207,7 @@ var abi = [
         type: "address"
       }
     ],
-    name: "githubId",
+    name: "addressToGithub",
     outputs: [
       {
         name: "",
@@ -260,23 +277,11 @@ var abi = [
     constant: false,
     inputs: [
       {
-        name: "repo",
-        type: "string"
-      },
-      {
-        name: "title",
-        type: "string"
-      },
-      {
-        name: "tags",
-        type: "string[]"
-      },
-      {
-        name: "price",
-        type: "uint256"
+        name: "_newOwner",
+        type: "address"
       }
     ],
-    name: "makeIssue",
+    name: "transferOwnership",
     outputs: [],
     payable: false,
     stateMutability: "nonpayable",
@@ -286,11 +291,31 @@ var abi = [
     constant: false,
     inputs: [
       {
-        name: "_newOwner",
+        name: "who",
         type: "address"
+      },
+      {
+        name: "repo",
+        type: "string"
+      },
+      {
+        name: "issueNumber",
+        type: "uint256"
+      },
+      {
+        name: "title",
+        type: "string"
+      },
+      {
+        name: "tags",
+        type: "string"
+      },
+      {
+        name: "price",
+        type: "uint256"
       }
     ],
-    name: "transferOwnership",
+    name: "makeIssue",
     outputs: [],
     payable: false,
     stateMutability: "nonpayable",
@@ -338,13 +363,18 @@ var abi = [
   }
 ];
 
-var contractAddress = "0x5881083Fbcc8b99192e93958A2Ac6d21D9fe73b3";
+var contractAddress = "0xbbB768c31c2AD3F0aB8ca1D9ae6b333e065b8020";
 var myContract = new caver.klay.Contract(abi, contractAddress, {
   from: "0x1234567890123456789012345678901234567891", // default from address
   gasPrice: "25000000000" // default gas price in peb, 25 Gpeb in this case
 });
 
-export function loadOpenedIssues(callback) {
+var privateKey =
+  "0x8d760d7929139a7c3a993f36169c25596352e7f303c1f923576253af6b2e9f55"; // ONLY FOR SHORT DEVELOP
+var myAccount = caver.klay.accounts.privateKeyToAccount(privateKey);
+caver.klay.accounts.wallet.add(myAccount);
+
+function loadOpenedIssues(callback) {
   loadIssue(0, callback);
 }
 
@@ -359,3 +389,44 @@ function loadIssue(idx, callback) {
       }
     });
 }
+
+function applyAccount(github_id) {
+  myContract.methods.applyAccount(github_id).send(
+    {
+      from: myAccount.address,
+      gas: "500000" // fixed
+    },
+    function(error, transactionHash) {
+      console.log(transactionHash);
+    }
+  );
+}
+
+// Server-Side Only
+function makeIssue(who, repo, issueNumber, title, tags, price) {
+  myContract.methods.makeIssue(who, repo, issueNumber, title, tags, price).send(
+    {
+      from: myAccount.address,
+      gas: "500000" // fixed
+    },
+    function(error, transactionHash) {
+      console.log(transactionHash);
+    }
+  );
+}
+
+// Server-Side Only
+function solve(id, by) {
+  myContract.methods.solve(id, by).send(
+    {
+      from: myAccount.address,
+      gas: "500000" // fixed
+    },
+    function(error, transactionHash) {
+      console.log(transactionHash);
+    }
+  );
+}
+
+// example
+loadOpenedIssues();
