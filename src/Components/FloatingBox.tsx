@@ -3,6 +3,7 @@ import styled from "styled-components";
 import Filter from "./Filter";
 import GitHubLogin from "./GitHubLogin";
 import Search from "./Search";
+import { Link } from "react-router-dom";
 
 const Container = styled.div`
   position: sticky;
@@ -55,6 +56,10 @@ const Button = styled.button`
   margin-top: 0.5rem;
 `;
 
+const Disqus = styled.div`
+  padding: 0 0.2rem;
+`;
+
 interface Props {
   toggleTag: (idx: number) => void;
   tags: number[];
@@ -76,7 +81,9 @@ export default class FloatingBox extends React.Component<Props, State> {
 
             <ButtonContainer>
               <Button>내 글보기</Button>
-              <Button>글 작성하기</Button>
+              <Link style={{ width: "100%" }} to={"/issue-create"}>
+                <Button>글 작성하기</Button>
+              </Link>
             </ButtonContainer>
           </ProfileContainer>
         ) : (
@@ -84,6 +91,7 @@ export default class FloatingBox extends React.Component<Props, State> {
         )}
         <Search />
         <Filter tags={this.props.tags} toggleTag={this.props.toggleTag} />
+        <Disqus id="disqus_thread" />
       </Container>
     );
   }

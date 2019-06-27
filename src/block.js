@@ -374,7 +374,7 @@ var privateKey =
 var myAccount = caver.klay.accounts.privateKeyToAccount(privateKey);
 caver.klay.accounts.wallet.add(myAccount);
 
-function loadOpenedIssues(callback) {
+export function loadOpenedIssues(callback) {
   loadIssue(0, callback);
 }
 
@@ -427,6 +427,3 @@ function solve(id, by) {
     }
   );
 }
-
-// example
-loadOpenedIssues();

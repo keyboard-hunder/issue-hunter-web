@@ -7,6 +7,7 @@ import Home from "./Routes/Home";
 import IssueDetail from "./Routes/IssueDetail";
 import { SharedContainer, SharedInnerContainer } from "./sharedStyle";
 import Oauth from "./Routes/Oauth";
+import IssueCreate from "./Routes/IssueCreate";
 
 const Container = styled(SharedContainer)``;
 
@@ -30,6 +31,7 @@ const Router: React.SFC<Props> = () => (
         <InnerContainer>
           <Switch>
             <Route path="/oauth" component={Oauth} />
+            <Route path="/issue-create" component={IssueCreate} />
             <Route path="/issue-detail/:issue_id" component={IssueDetail} />
             <Route path="/" component={Home} />
           </Switch>

@@ -12,6 +12,7 @@ const Title = styled.div`
 const Container = styled.div`
   background-color: white;
   padding: 1rem;
+  margin-bottom: 0.5rem;
 `;
 
 const TagContainer = styled.div`

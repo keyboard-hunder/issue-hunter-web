@@ -11,3 +11,12 @@ const serverBaseAPI = axios.create({ baseURL: serverBaseURL });
 export const serverLoginAPIs = {
   login: (code: string) => serverBaseAPI.post(`login/oauth/github`, { code })
 };
+
+export const serverDataAPIs = {
+  getRepositories: (jwt: string) =>
+    serverBaseAPI.get(`github/repositories`, {
+      headers: { Authorization: `Bearer ${jwt}` }
+    }),
+  getIssues: (repositoryFullname: string) =>
+    serverBaseAPI.get(`github/issues`, { params: { repositoryFullname } })
+};

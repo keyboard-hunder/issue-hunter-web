@@ -2,20 +2,15 @@ import React from "react";
 import styled from "styled-components";
 import { SharedContainer, SharedInnerContainer } from "../sharedStyle";
 import { Link } from "react-router-dom";
+import Logo from "../static/logo.svg";
 
 const Container = styled(SharedContainer)`
   padding: 1rem 1rem;
-  background-color: #8db0d3;
+  background-color: #4e7cff;
 `;
 
 const InnerContainer = styled(SharedInnerContainer)`
   justify-content: space-between;
-`;
-
-const Logo = styled.div`
-  font-weight: 700;
-  font-size: 1.5rem;
-  color: white;
 `;
 
 interface State {}
@@ -28,7 +23,7 @@ export default class Header extends React.Component<State, Props> {
       <Container>
         <InnerContainer>
           <Link to="/">
-            <Logo>Issue - Hunter</Logo>
+            <img src={Logo} />
           </Link>
         </InnerContainer>
       </Container>
