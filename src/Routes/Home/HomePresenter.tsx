@@ -19,7 +19,7 @@ const IssueItemList = styled.div`
 
 interface Props {}
 
-const HomePresenter = ({  }: Props) => {
+const HomePresenter: React.SFC<Props> = ({}) => {
   return (
     <Container>
       <IssueItemList>

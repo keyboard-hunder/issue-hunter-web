@@ -1,4 +1,5 @@
 import axios from "axios";
 
 // the base URL for your REST API backend
-const baseUrl = "https://api.github.com/";
+const baseURL = "https://api.github.com/";
+export const baseApi = axios.create({ baseURL });
