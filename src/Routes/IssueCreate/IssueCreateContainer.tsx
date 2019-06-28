@@ -2,6 +2,8 @@ import React from "react";
 import IssueCreatePresenter from "./IssueCreatePresenter";
 import { serverDataAPIs } from "../../api";
 import { Loading } from "../../Components/Loading";
+import { toast } from "react-toastify";
+import { PLTags } from "../../config/_mixin";
 
 interface Props {}
 
@@ -95,6 +97,10 @@ export default class IssueCreateContainer extends React.Component<
     }
   };
 
+  handleOnChange = (price: any) => {
+    this.setState({ price });
+  };
+
   componentDidMount = async () => {
     const jwt = localStorage.getItem("jwt");
     const { repositoryPage } = this.state;
@@ -112,12 +118,42 @@ export default class IssueCreateContainer extends React.Component<
     } else {
     }
   };
+
+  handleOnSubmit = async (
+    repositoryFullName: string,
+    klaytnPrice: number,
+    tags: number[],
+    issueNumber: number
+  ) => {
+    const category: any = [];
+    tags.forEach((tag: number) => category.push(PLTags[tag]));
+    const jwt = localStorage.getItem("jwt");
+    console.log(
+      jwt,
+      repositoryFullName,
+      klaytnPrice,
+      category.join(","),
+      issueNumber
+    );
+    if (jwt) {
+      serverDataAPIs.postIssue(
+        jwt,
+        repositoryFullName,
+        klaytnPrice,
+        category.join(","),
+        issueNumber
+      );
+    } else {
+      toast.error("wrong json web token!");
+    }
+  };
   render() {
     const {
       loading,
       repositories,
       issues,
       tags,
+      price,
       targetRepository,
       targetIssue,
       noMoreRepository
@@ -132,10 +168,13 @@ export default class IssueCreateContainer extends React.Component<
         repositories={repositories}
         issues={issues}
         tags={tags}
+        price={price}
         targetRepository={targetRepository}
         targetIssue={targetIssue}
         noMoreRepository={noMoreRepository}
         toggleTag={this.toggleTag}
+        handleOnChange={this.handleOnChange}
+        handleOnSubmit={this.handleOnSubmit}
       />
     );
   }

@@ -19,5 +19,25 @@ export const serverDataAPIs = {
       headers: { Authorization: `Bearer ${jwt}` }
     }),
   getIssues: (repositoryFullName: string, page: number) =>
-    serverBaseAPI.get(`github/issues`, { params: { repositoryFullName, page } })
+    serverBaseAPI.get(`github/issues`, {
+      params: { repositoryFullName, page }
+    }),
+  getProfile: (jwt: string) =>
+    serverBaseAPI.get(`users/profile`, {
+      headers: { Authorization: `Bearer ${jwt}` }
+    }),
+  postIssue: (
+    jwt: string,
+    repositoryFullName: string,
+    klaytnPrice: number,
+    category: string,
+    issueNumber: number
+  ) =>
+    serverBaseAPI.post(
+      `issues`,
+      { repositoryFullName, klaytnPrice, category, issueNumber },
+      {
+        headers: { Authorization: `Bearer ${jwt}` }
+      }
+    )
 };

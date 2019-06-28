@@ -10,6 +10,7 @@ interface Props {
 interface State {}
 
 const Container = styled.div<{ isActive: boolean }>`
+  animation: fadeIn 1s ease-in-out;
   width: 90%;
   height: 2.5rem;
   background-color: ${({ isActive }) => (isActive ? "#427cff" : "white")};
@@ -39,13 +40,13 @@ export default class Issue extends React.Component<Props, State> {
   render() {
     const {
       isActive,
-      issue: { title }
+      issue: { num, title }
     } = this.props;
     console.log(this.props.issue);
     return (
       <Container
         isActive={isActive}
-        onClick={() => this.props.handleOnClickIssue(title)}
+        onClick={() => this.props.handleOnClickIssue(num.toString())}
       >
         {title}
       </Container>

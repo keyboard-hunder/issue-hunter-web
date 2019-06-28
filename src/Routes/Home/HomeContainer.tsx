@@ -2,6 +2,7 @@ import React from "react";
 import HomePresenter from "./HomePresenter";
 import { loadIssue } from "../../block";
 import { Loading } from "../../Components/Loading";
+import { serverDataAPIs } from "../../api";
 
 interface Props {}
 
@@ -40,6 +41,7 @@ export default class HomeContainer extends React.Component<Props, State> {
   componentDidMount = async () => {
     let issues: any = [];
     const range = 10;
+    const jwt = localStorage.getItem("jwt");
     for (let i = 0; i < range; i++) {
       loadIssue(i, (result: any) => {
         if (result) {
@@ -48,22 +50,11 @@ export default class HomeContainer extends React.Component<Props, State> {
         }
       });
     }
+    if (jwt) {
+      const profile = await serverDataAPIs.getProfile(jwt);
+      console.log(profile);
+    }
   };
-
-  // componentDidUpdate = async (prevProp: Props, prevState: State) => {
-  //   console.log(this.state);
-  //   if (this.state.issues.length !== 0) {
-  //     let issues: any = [];
-  //     const range = 10;
-  //     for (let i = 0; i < range; i++) {
-  //       loadIssue(i, (result: any) => {
-  //         if (result) issues.push(result);
-  //       });
-  //     }
-  //     console.log(issues);
-  //     this.setState({ issues });
-  //   }
-  // };
 
   render() {
     const { issues } = this.state;

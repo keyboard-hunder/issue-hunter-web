@@ -8,6 +8,7 @@ const ArrowIcon = styled.i`
 `;
 
 const Container = styled.div<{ isActive: boolean }>`
+  animation: fadeIn 1s ease-in-out;
   width: 90%;
   height: 2.5rem;
   background-color: ${({ isActive }) => (isActive ? "#427cff" : "white")};

@@ -79,8 +79,8 @@ const ProfileContainer = styled.div`
   margin-right: 1rem;
 `;
 
-const ProfileImage = styled.div`
-  background-image: url(https://mblogthumb-phinf.pstatic.net/MjAxODA1MjhfMTA0/MDAxNTI3NDg3MTczOTY5.C2eXPMwTXPN7mN6rhXpLrbLAu36fyR7JDr3Ym8URGl8g.97dxz-n9zjbzgv8KbhDwrICDNbNierqWueC0aRsfgjIg.JPEG.ehfkdl8989/KakaoTalk_Moim_4UjmLsR1AohJhEmSqqNZkX7uHKU0kp.jpg?type=w800);
+const ProfileImage = styled.div<{ url: string }>`
+  background-image: url(${({ url }) => url});
   background-position: center center;
   background-size: 100%;
   border-radius: 100%;
@@ -107,27 +107,22 @@ interface State {}
 export default class IssueItem extends React.Component<Props, State> {
   render() {
     const { issue } = this.props;
-    console.log(issue);
-    return issue ? (
+    return (
       <Container>
         <ProfileContainer>
-          <ProfileImage />
-          <Nickname>보노보노</Nickname>
+          <ProfileImage url={issue.imageURL} />
+          <Nickname>{issue.repoURL.split("/")[4]}</Nickname>
         </ProfileContainer>
         <MainContainer>
-          <RepoText>Keyboard-hunter</RepoText>
+          <RepoText>{issue.repoURL.split("/")[5]}</RepoText>
           <IssueText>
             <Link to="/issue-detail/1">{issue.title}</Link>
           </IssueText>
           <ThirdContainer>
             <TagContainer>
-              {issue.tags.split("/").map((tag: string) => (
-                <PLTag pl={tag} />
+              {issue.tags.split("/").map((tag: string, idx: number) => (
+                <PLTag pl={tag} key={idx} />
               ))}
-              <PLTag pl="html" />
-              <PLTag pl="css" />
-              <PLTag pl="js" />
-              <PLTag pl="react" />
             </TagContainer>
             <TimeText>30분 전</TimeText>
           </ThirdContainer>
@@ -135,36 +130,7 @@ export default class IssueItem extends React.Component<Props, State> {
 
         <NumericContainer>
           <NumericItem>
-            <NumericNum>₭ 0.002</NumericNum>
-            <KlaytnIcon src={Klaytn} />
-          </NumericItem>
-        </NumericContainer>
-      </Container>
-    ) : (
-      <Container>
-        <ProfileContainer>
-          <ProfileImage />
-          <Nickname>보노보노</Nickname>
-        </ProfileContainer>
-        <MainContainer>
-          <RepoText>Keyboard-hunter</RepoText>
-          <IssueText>
-            <Link to="/issue-detail/1">[KH] 키보드 버그</Link>
-          </IssueText>
-          <ThirdContainer>
-            <TagContainer>
-              <PLTag pl="html" />
-              <PLTag pl="css" />
-              <PLTag pl="js" />
-              <PLTag pl="react" />
-            </TagContainer>
-            <TimeText>30분 전</TimeText>
-          </ThirdContainer>
-        </MainContainer>
-
-        <NumericContainer>
-          <NumericItem>
-            <NumericNum>₭ 0.002</NumericNum>
+            <NumericNum>₭ {issue.price}</NumericNum>
             <KlaytnIcon src={Klaytn} />
           </NumericItem>
         </NumericContainer>

@@ -3,6 +3,8 @@ import styled from "styled-components";
 import Repository from "../../Components/Repository";
 import Issue from "../../Components/Issue";
 import Filter from "../../Components/Filter";
+import Coin from "../../static/klaytn design.png";
+import { InputNumber } from "antd";
 
 const Container = styled.div`
   width: 100%;
@@ -58,7 +60,7 @@ const IssueContainer = styled.div`
 `;
 
 const RestSelector = styled.div`
-  height: 15rem;
+  height: 20rem;
   width: 100%;
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -78,7 +80,7 @@ const LeftTopItem = styled.div`
 `;
 
 const LeftTopTitle = styled.div`
-  font-size: 1rem;
+  font-size: 1.2rem;
   font-weight: 700;
   color: #4e7cff;
   margin-bottom: 0.5rem;
@@ -111,6 +113,50 @@ const Nickname = styled.div`
 
 const PlusIcon = styled.i`
   font-size: 1.5rem;
+  cursor: pointer;
+`;
+
+const RightContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 1rem 2rem 1rem;
+`;
+
+const KlaytnTitle = styled.div`
+  align-self: flex-start;
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #4e7cff;
+`;
+
+const CoinImage = styled.img`
+  width: 8rem;
+`;
+
+const Question = styled.div`
+  font-size: 1.2rem;
+  font-weight: 700;
+`;
+
+const CoinInput = styled(InputNumber)`
+  width: 100%;
+`;
+
+const InputContainer = styled.div`
+  border: 1px solid #4e7cff;
+  width: 12rem;
+  height: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
+
+const SubmitButton = styled.i`
+  font-size: 1.5rem;
+  padding: 0.5rem;
+  cursor: pointer;
 `;
 
 interface Props {
@@ -120,10 +166,18 @@ interface Props {
   targetRepository: string;
   targetIssue: string;
   noMoreRepository: boolean;
+  price: number;
   handleOnClickRepository: (repo: string) => void;
   handleOnClickIssue: (issue: string) => void;
   handleOnClickMoreRepository: () => Promise<void>;
   toggleTag: (idx: number) => void;
+  handleOnChange: (value: any) => void;
+  handleOnSubmit: (
+    repositoryFullName: string,
+    klaytnPrice: number,
+    tags: number[],
+    issueNumber: number
+  ) => Promise<void>;
 }
 
 const IssueCreatePresenter: React.SFC<Props> = ({
@@ -133,10 +187,13 @@ const IssueCreatePresenter: React.SFC<Props> = ({
   targetIssue,
   tags,
   toggleTag,
+  price,
+  handleOnSubmit,
   noMoreRepository,
   handleOnClickRepository,
   handleOnClickIssue,
-  handleOnClickMoreRepository
+  handleOnClickMoreRepository,
+  handleOnChange
 }) => {
   return (
     <Container>
@@ -160,18 +217,15 @@ const IssueCreatePresenter: React.SFC<Props> = ({
           )}
         </RepositoryContainer>
         <IssueContainer>
-          {!issues ? (
-            <div>this is issue section please select repository first</div>
-          ) : (
+          {issues &&
             issues.map((issue: any, idx: number) => (
               <Issue
-                isActive={issue.title === targetIssue}
+                isActive={issue.num.toString() === targetIssue}
                 handleOnClickIssue={handleOnClickIssue}
                 issue={issue}
                 key={idx}
               />
-            ))
-          )}
+            ))}
         </IssueContainer>
       </IssueSelector>
       <RestSelector>
@@ -194,7 +248,32 @@ const IssueCreatePresenter: React.SFC<Props> = ({
             <Filter tags={tags} toggleTag={toggleTag} />
           </LeftBottomContainer>
         </LeftContainer>
-        selector
+        <RightContainer>
+          <KlaytnTitle>Klaytn</KlaytnTitle>
+          <CoinImage src={Coin} />
+          <Question>얼마나 줄꺼에요?</Question>
+          <InputContainer>
+            <CoinInput
+              defaultValue={0}
+              formatter={price =>
+                `₭ ${price}`.replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+              }
+              parser={price => price!.toString().replace(/\$\s?|(,*)/g, "")}
+              onChange={handleOnChange}
+            />
+            <SubmitButton
+              onClick={() =>
+                handleOnSubmit(
+                  targetRepository,
+                  price,
+                  tags,
+                  parseInt(targetIssue)
+                )
+              }
+              className="fas fa-arrow-right"
+            />
+          </InputContainer>
+        </RightContainer>
       </RestSelector>
     </Container>
   );

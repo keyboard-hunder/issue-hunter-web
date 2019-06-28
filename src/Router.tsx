@@ -25,6 +25,20 @@ const SectionContainer = styled.section`
   position: absolute;
   top: 6rem;
 `;
+
+// const Advertise = styled.div`
+//   width: 100%;
+//   height: 10rem;
+//   border-radius: 0.5rem;
+//   background-color: white;
+//   margin-bottom: 1rem;
+//   display: flex;
+//   align-items: center;
+//   justify-content: center;
+//   font-size: 2rem;
+//   font-weight: 100;
+// `;
+
 interface Props {}
 
 const Router: React.SFC<Props> = () => (
@@ -34,6 +48,7 @@ const Router: React.SFC<Props> = () => (
     <SectionContainer>
       <Container>
         <InnerContainer>
+          {/* <Advertise>보노보노님이 저번 달에 번 클레이튼은??!!!</Advertise> */}
           <Switch>
             <Route path="/oauth" component={Oauth} />
             <Route path="/issue-create" component={IssueCreate} />
