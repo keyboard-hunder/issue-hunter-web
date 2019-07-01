@@ -463,24 +463,30 @@ export function loadIssue(idx, callback) {
     });
 }
 
-export function applyAccount(github_id, privateKey) {
+export const applyAccount = async (github_id, privateKey) => {
   // keystore : json(object), password : string
   var myAccount = caver.klay.accounts.privateKeyToAccount(privateKey);
   console.log("check1");
-  myContract.methods.applyAccount(github_id).send(
-    {
-      from: myAccount.address,
-      gas: "5000000" // fixed
-    },
-    function(error, transactionHash) {
-      // myContract.methods.GithubToAddress
-      if (error) console.log("error");
-      else {
-        localStorage.setItem("address", myAccount.address);
+  const address = await myContract.methods.githubToAddress(github_id).call();
+  if (address) {
+    console.log("check2");
+    localStorage.setItem("address", address);
+  } else {
+    myContract.methods.applyAccount(github_id).send(
+      {
+        from: myAccount.address,
+        gas: "5000000" // fixed
+      },
+      function(error, transactionHash) {
+        // myContract.methods.GithubToAddress
+        if (error) console.log("error");
+        else {
+          localStorage.setItem("address", myAccount.address);
+        }
       }
-    }
-  );
-}
+    );
+  }
+};
 
 function keystore2Account(keystore, password) {
   return caver.klay.accounts.decrypt(keystore, password);

@@ -6,6 +6,7 @@ import Search from "./Search";
 import { Link, RouteComponentProps, withRouter } from "react-router-dom";
 import { Modal } from "antd";
 import { applyAccount } from "../block";
+import { getBalance } from "../getBalance";
 
 const Container = styled.div`
   position: sticky;
@@ -62,10 +63,6 @@ const Button = styled.button`
   border-radius: 1rem;
 `;
 
-const Disqus = styled.div`
-  padding: 0 0.2rem;
-`;
-
 const Input = styled.input`
   width: 100%;
   height: 100%;
@@ -78,6 +75,10 @@ const Address = styled.div`
 `;
 const Alert = styled.div``;
 
+const Token = styled.div`
+  font-size: 1.2rem;
+`;
+
 interface Props extends RouteComponentProps {
   toggleTag: (idx: number) => void;
   tags: number[];
@@ -86,6 +87,7 @@ interface Props extends RouteComponentProps {
 interface State {
   visible: boolean;
   privateKey: string;
+  token: number;
 }
 
 class FloatingBox extends React.Component<Props, State> {
@@ -93,7 +95,8 @@ class FloatingBox extends React.Component<Props, State> {
     super(props);
     this.state = {
       visible: false,
-      privateKey: ""
+      privateKey: "",
+      token: 0
     };
   }
 
@@ -107,7 +110,6 @@ class FloatingBox extends React.Component<Props, State> {
   onClickLogOut = () => {
     localStorage.removeItem("jwt");
     localStorage.removeItem("address");
-    console.log(this.props);
     this.props.history.push("/");
   };
 
@@ -118,7 +120,6 @@ class FloatingBox extends React.Component<Props, State> {
   };
 
   handleOk = (e: any) => {
-    console.log(e);
     try {
       applyAccount("3915393", this.state.privateKey);
     } catch (error) {}
@@ -134,10 +135,22 @@ class FloatingBox extends React.Component<Props, State> {
     });
   };
 
+  componentDidMount = async () => {
+    const address = localStorage.getItem("address");
+    const hasAddress = Boolean(address);
+    if (hasAddress) {
+      getBalance(address, (token: number) => {
+        this.setState({ token });
+      });
+    }
+  };
+
   render() {
     const { privateKey } = this.state;
     const isLogin = Boolean(localStorage.getItem("jwt"));
-    const hasAddress = Boolean(localStorage.getItem("address"));
+    const address = localStorage.getItem("address");
+    const hasAddress = Boolean(address);
+    const { token } = this.state;
     return (
       <Container>
         {isLogin ? (
@@ -148,9 +161,12 @@ class FloatingBox extends React.Component<Props, State> {
             </UserProfile>
             <ButtonContainer>
               {hasAddress ? (
-                <Address>
-                  {localStorage.getItem("address")!.slice(0, 10) + "..."}
-                </Address>
+                <>
+                  <Address>
+                    {localStorage.getItem("address")!.slice(0, 10) + "..."}
+                  </Address>
+                  <Token>₭ {token}</Token>
+                </>
               ) : (
                 <Alert>지갑주소를 입력해주세요.</Alert>
               )}
@@ -175,7 +191,6 @@ class FloatingBox extends React.Component<Props, State> {
         )}
         <Search />
         <Filter tags={this.props.tags} toggleTag={this.props.toggleTag} />
-        <Disqus id="disqus_thread" />
       </Container>
     );
   }

@@ -3,6 +3,7 @@ import HomePresenter from "./HomePresenter";
 import { loadIssue } from "../../block";
 import { Loading } from "../../Components/Loading";
 import { serverDataAPIs } from "../../api";
+import { PLTags } from "../../config/_mixin";
 
 interface Props {}
 
@@ -40,12 +41,13 @@ export default class HomeContainer extends React.Component<Props, State> {
 
   componentDidMount = async () => {
     let issues: any = [];
-    const range = 10;
+    const range = 100;
     const jwt = localStorage.getItem("jwt");
     for (let i = 0; i < range; i++) {
       loadIssue(i, (result: any) => {
         if (result) {
           issues.push(result);
+          issues.sort((a: any, b: any) => b.timestamp - a.timestamp);
           this.setState({ issues });
         }
       });
@@ -57,8 +59,15 @@ export default class HomeContainer extends React.Component<Props, State> {
   };
 
   render() {
-    const { issues } = this.state;
-    console.log(this.state);
+    let { issues, tags } = this.state;
+    if (tags.length !== 0) {
+      const category: string[] = [];
+      tags.forEach((tag: number) => category.push(PLTags[tag]));
+      if (issues) {
+        issues = issues.filter((issue: any) => category.includes(issue.tags));
+        console.log(issues);
+      }
+    }
     return !issues ? (
       <Loading />
     ) : (

@@ -4,8 +4,9 @@ import { serverDataAPIs } from "../../api";
 import { Loading } from "../../Components/Loading";
 import { toast } from "react-toastify";
 import { PLTags } from "../../config/_mixin";
+import { withRouter, RouteComponentProps } from "react-router";
 
-interface Props {}
+interface Props extends RouteComponentProps {}
 
 interface State {
   loading: boolean;
@@ -21,10 +22,7 @@ interface State {
   noMoreIssue: boolean;
 }
 
-export default class IssueCreateContainer extends React.Component<
-  Props,
-  State
-> {
+class IssueCreateContainer extends React.Component<Props, State> {
   constructor(props: Props) {
     super(props);
     this.state = {
@@ -136,13 +134,19 @@ export default class IssueCreateContainer extends React.Component<
       issueNumber
     );
     if (jwt) {
-      serverDataAPIs.postIssue(
-        jwt,
-        repositoryFullName,
-        klaytnPrice,
-        category.join(","),
-        issueNumber
-      );
+      try {
+        await serverDataAPIs.postIssue(
+          jwt,
+          repositoryFullName,
+          klaytnPrice,
+          category.join(","),
+          issueNumber
+        );
+
+        this.props.history.push("/");
+      } catch (error) {
+        toast.error(error);
+      }
     } else {
       toast.error("wrong json web token!");
     }
@@ -179,3 +183,5 @@ export default class IssueCreateContainer extends React.Component<
     );
   }
 }
+
+export default withRouter(IssueCreateContainer);

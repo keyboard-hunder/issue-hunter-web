@@ -88,7 +88,10 @@ const LeftTopTitle = styled.div`
 
 const LeftContainer = styled.div``;
 
-const LeftTopSubTitle = styled.div``;
+const LeftTopSubTitle = styled.div`
+  font-size: 1.2rem;
+  font-weight: 700;
+`;
 
 const ProfileContainer = styled.div`
   display: flex;
@@ -241,7 +244,7 @@ const IssueCreatePresenter: React.SFC<Props> = ({
             </LeftTopItem>
             <LeftTopItem>
               <LeftTopTitle>Issue</LeftTopTitle>
-              <LeftTopSubTitle>{targetIssue}</LeftTopSubTitle>
+              <LeftTopSubTitle>#{targetIssue}</LeftTopSubTitle>
             </LeftTopItem>
           </LeftTopContainer>
           <LeftBottomContainer>

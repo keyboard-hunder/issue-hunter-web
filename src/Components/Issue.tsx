@@ -48,7 +48,7 @@ export default class Issue extends React.Component<Props, State> {
         isActive={isActive}
         onClick={() => this.props.handleOnClickIssue(num.toString())}
       >
-        {title}
+        #{num} {title}
       </Container>
     );
   }

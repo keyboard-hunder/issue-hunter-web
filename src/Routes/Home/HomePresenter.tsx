@@ -24,7 +24,6 @@ interface Props {
 }
 
 const HomePresenter: React.SFC<Props> = ({ tags, toggleTag, issues }) => {
-  console.log("in presenter", issues);
   return (
     <Container>
       <IssueItemList>

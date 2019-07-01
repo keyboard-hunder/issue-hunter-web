@@ -1,7 +1,6 @@
 import React from "react";
 import styled from "styled-components";
 import PLTag from "./PLTag";
-import { Link } from "react-router-dom";
 import Klaytn from "../static/klaytn.svg";
 
 const NumericContainer = styled.div`
@@ -38,7 +37,9 @@ const IssueText = styled.div`
   cursor: pointer;
 `;
 
-const TimeText = styled.div``;
+const TimeText = styled.div`
+  font-weight: 700;
+`;
 
 const TagContainer = styled.div`
   line-height: 2;
@@ -46,6 +47,7 @@ const TagContainer = styled.div`
 
 const MainContainer = styled.div`
   display: flex;
+  justify-content: space-between;
   flex-direction: column;
   width: 100%;
   padding: 1rem 0;
@@ -77,6 +79,7 @@ const ProfileContainer = styled.div`
   align-items: center;
   justify-content: center;
   margin-right: 1rem;
+  max-width: 5rem;
 `;
 
 const ProfileImage = styled.div<{ url: string }>`
@@ -107,34 +110,45 @@ interface State {}
 export default class IssueItem extends React.Component<Props, State> {
   render() {
     const { issue } = this.props;
-    return (
-      <Container>
-        <ProfileContainer>
-          <ProfileImage url={issue.imageURL} />
-          <Nickname>{issue.repoURL.split("/")[4]}</Nickname>
-        </ProfileContainer>
-        <MainContainer>
-          <RepoText>{issue.repoURL.split("/")[5]}</RepoText>
-          <IssueText>
-            <Link to="/issue-detail/1">{issue.title}</Link>
-          </IssueText>
-          <ThirdContainer>
-            <TagContainer>
-              {issue.tags.split("/").map((tag: string, idx: number) => (
-                <PLTag pl={tag} key={idx} />
-              ))}
-            </TagContainer>
-            <TimeText>30분 전</TimeText>
-          </ThirdContainer>
-        </MainContainer>
+    var date = new Date(issue.timestamp * 1000);
+    // Hours part from the timestamp
+    var hours = date.getHours();
+    // Minutes part from the timestamp
+    var minutes = "0" + date.getMinutes();
+    // Seconds part from the timestamp
+    var seconds = "0" + date.getSeconds();
 
-        <NumericContainer>
-          <NumericItem>
-            <NumericNum>₭ {issue.price}</NumericNum>
-            <KlaytnIcon src={Klaytn} />
-          </NumericItem>
-        </NumericContainer>
-      </Container>
+    // Will display time in 10:30:23 format
+    var formattedTime =
+      hours + ":" + minutes.substr(-2) + ":" + seconds.substr(-2);
+    // console.log(`${issue.repoURL}/issues/${issue.issueNumber}`);
+    return (
+      <a target="_blank" href={`${issue.repoURL}/issues/${issue.issueNumber}`}>
+        <Container>
+          <ProfileContainer>
+            <ProfileImage url={issue.imageURL} />
+            <Nickname>{issue.repoURL.split("/")[3]}</Nickname>
+          </ProfileContainer>
+          <MainContainer>
+            <RepoText>{issue.repoURL.split("/")[4]}</RepoText>
+            <IssueText>{issue.title}</IssueText>
+            <ThirdContainer>
+              <TagContainer>
+                {issue.tags.split("/").map((tag: string, idx: number) => (
+                  <PLTag pl={tag} key={idx} />
+                ))}
+              </TagContainer>
+              <TimeText>{formattedTime}</TimeText>
+            </ThirdContainer>
+          </MainContainer>
+          <NumericContainer>
+            <NumericItem>
+              <NumericNum>₭ {issue.price}</NumericNum>
+              <KlaytnIcon src={Klaytn} />
+            </NumericItem>
+          </NumericContainer>
+        </Container>
+      </a>
     );
   }
 }

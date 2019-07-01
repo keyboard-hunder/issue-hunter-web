@@ -35,7 +35,6 @@ interface State {}
 
 class Header extends React.Component<Props, State> {
   render() {
-    console.log(this.props);
     const {
       location: { pathname }
     } = this.props;
