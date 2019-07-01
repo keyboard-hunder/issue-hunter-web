@@ -2,6 +2,8 @@ import React from "react";
 import styled from "styled-components";
 import PLTag from "./PLTag";
 import Klaytn from "../static/klaytn.svg";
+import "moment/locale/ko";
+var moment = require("moment");
 
 const NumericContainer = styled.div`
   display: flex;
@@ -110,18 +112,8 @@ interface State {}
 export default class IssueItem extends React.Component<Props, State> {
   render() {
     const { issue } = this.props;
-    var date = new Date(issue.timestamp * 1000);
-    // Hours part from the timestamp
-    var hours = date.getHours();
-    // Minutes part from the timestamp
-    var minutes = "0" + date.getMinutes();
-    // Seconds part from the timestamp
-    var seconds = "0" + date.getSeconds();
-
-    // Will display time in 10:30:23 format
-    var formattedTime =
-      hours + ":" + minutes.substr(-2) + ":" + seconds.substr(-2);
-    // console.log(`${issue.repoURL}/issues/${issue.issueNumber}`);
+    let date = new Date(issue.timestamp * 1000);
+    let formattedTime = moment(date).fromNow();
     return (
       <a target="_blank" href={`${issue.repoURL}/issues/${issue.issueNumber}`}>
         <Container>
