@@ -1,6 +1,6 @@
 import React from "react";
 import HomePresenter from "./HomePresenter";
-import { loadIssue } from "../../block";
+import { loadIssue } from "../../Utils/block";
 import { Loading } from "../../Components/Loading";
 import { serverDataAPIs } from "../../api";
 import { PLTags } from "../../config/_mixin";
@@ -36,7 +36,6 @@ export default class HomeContainer extends React.Component<Props, State> {
   };
 
   handleSetTags = (item: any) => {
-    console.log(item);
   };
 
   componentDidMount = async () => {
@@ -54,7 +53,6 @@ export default class HomeContainer extends React.Component<Props, State> {
     }
     if (jwt) {
       const profile = await serverDataAPIs.getProfile(jwt);
-      console.log(profile);
     }
   };
 
@@ -65,7 +63,6 @@ export default class HomeContainer extends React.Component<Props, State> {
       tags.forEach((tag: number) => category.push(PLTags[tag]));
       if (issues) {
         issues = issues.filter((issue: any) => category.includes(issue.tags));
-        console.log(issues);
       }
     }
     return !issues ? (

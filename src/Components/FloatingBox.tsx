@@ -5,8 +5,8 @@ import GitHubLogin from "./GitHubLogin";
 import Search from "./Search";
 import { Link, RouteComponentProps, withRouter } from "react-router-dom";
 import { Modal } from "antd";
-import { applyAccount } from "../block";
-import { getBalance } from "../getBalance";
+import { applyAccount } from "../Utils/block";
+import { getBalance } from "../Utils/getBalance";
 
 const Container = styled.div`
   position: sticky;
@@ -129,7 +129,6 @@ class FloatingBox extends React.Component<Props, State> {
   };
 
   handleCancel = (e: any) => {
-    console.log(e);
     this.setState({
       visible: false
     });

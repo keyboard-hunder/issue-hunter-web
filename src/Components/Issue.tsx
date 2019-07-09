@@ -42,7 +42,6 @@ export default class Issue extends React.Component<Props, State> {
       isActive,
       issue: { num, title }
     } = this.props;
-    console.log(this.props.issue);
     return (
       <Container
         isActive={isActive}

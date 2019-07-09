@@ -45,14 +45,12 @@ class IssueCreateContainer extends React.Component<Props, State> {
   };
 
   handleOnClickRepository = async (targetRepository: any) => {
-    console.log(targetRepository);
     this.setState({ targetRepository });
     const {
       data: {
         result: { issues }
       }
     } = await serverDataAPIs.getIssues(targetRepository, 0);
-    console.log(issues);
     if (issues) {
       this.setState({ issues });
     } else {
@@ -61,7 +59,6 @@ class IssueCreateContainer extends React.Component<Props, State> {
   };
 
   handleOnClickMoreRepository = async () => {
-    console.log(this.state);
     const jwt = localStorage.getItem("jwt");
     const { repositoryPage } = this.state;
     if (jwt) {
@@ -126,13 +123,6 @@ class IssueCreateContainer extends React.Component<Props, State> {
     const category: any = [];
     tags.forEach((tag: number) => category.push(PLTags[tag]));
     const jwt = localStorage.getItem("jwt");
-    console.log(
-      jwt,
-      repositoryFullName,
-      klaytnPrice,
-      category.join(","),
-      issueNumber
-    );
     if (jwt) {
       try {
         await serverDataAPIs.postIssue(
